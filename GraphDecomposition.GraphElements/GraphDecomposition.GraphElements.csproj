@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DD8686EB-A464-4611-B836-A77256786272}</ProjectGuid>
+    <ProjectGuid>{50663050-C076-46AD-8F10-9116B635F7CE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GraphDecomposition.Algorithms</RootNamespace>
-    <AssemblyName>GraphDecomposition.Algorithms</AssemblyName>
+    <RootNamespace>GraphDecomposition.GraphElements</RootNamespace>
+    <AssemblyName>GraphDecomposition.GraphElements</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,13 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stinson.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GraphDecomposition.GraphElements\GraphDecomposition.GraphElements.csproj">
-      <Project>{50663050-C076-46AD-8F10-9116B635F7CE}</Project>
-      <Name>GraphDecomposition.GraphElements</Name>
-    </ProjectReference>
+    <Compile Include="Triple.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

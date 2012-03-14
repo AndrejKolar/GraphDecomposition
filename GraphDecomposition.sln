@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.Algorith
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.Utils", "GraphDecomposition.Utils\GraphDecomposition.Utils.csproj", "{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.GraphElements", "GraphDecomposition.GraphElements\GraphDecomposition.GraphElements.csproj", "{50663050-C076-46AD-8F10-9116B635F7CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}.Release|x86.ActiveCfg = Release|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{50663050-C076-46AD-8F10-9116B635F7CE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
