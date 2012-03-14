@@ -223,5 +223,53 @@ namespace GraphDecomposition.Algorithms
             DeletePair(x, z);
             DeletePair(z, x);
         }
+
+        /// <summary>
+        /// If all three pairs in a block are live creates an new block and adds it to the solution,
+        /// if two are live it exchanges an old block with the new one
+        /// </summary>
+        private void Switch()
+        {
+            Random rand = new Random();
+
+            int r = rand.Next(1, NumLivePoints + 1);
+
+            int x = LivePoints[r];
+
+            int t = rand.Next(2, NumLivePairs[x] + 1);
+            int s = rand.Next(1, t);
+
+            int y = LivePairs[x, s];
+            int z = LivePairs[x, t];
+
+            int NumBlocks = 0;
+            int w = 0;
+
+            if (Other[y, z] == 0)
+            {
+                AddBlock(x, y, z);
+                NumBlocks = NumBlocks + 1;
+            }
+            else
+            {
+                w = Other[y, z];
+                ExchangeBlock(x, y, z, w);
+            } 
+        }
+
+        private Triple[] StinsonsAlgorithm(int v)
+        {
+            int NumBlocks = 0;
+            Initialize(v);
+
+            while (NumBlocks < v * (v - 1) / 6)
+            {
+                Switch();
+            }
+
+            Triple[] B = ConstructBlocks(v, Other);
+
+            return B;
+        }
     }
 }
