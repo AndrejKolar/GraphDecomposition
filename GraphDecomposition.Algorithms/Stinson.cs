@@ -15,7 +15,7 @@ namespace GraphDecomposition.Algorithms
         private int v;
 
         /// <summary>
-        /// Number of triples in a STS
+        /// Number of triples in a STS(v)
         /// </summary>
         private int b;
 
@@ -37,7 +37,12 @@ namespace GraphDecomposition.Algorithms
         /// <summary>
         /// Array that keeps track of the third point in a block containing x and y 
         /// </summary>
-        int[,] Other;
+        private int[,] Other;
+
+        /// <summary>
+        /// Number of blocks in the PSTS(v)
+        /// </summary>
+        private int NumBlocks;
 
         /// <summary>
         /// Starts the algorithm
@@ -47,10 +52,12 @@ namespace GraphDecomposition.Algorithms
         {
             this.v = v;
             this.b = v * (v - 1) / 6;
+
+            StinsonsAlgorithm(v);
         }
 
         /// <summary>
-        /// Constructs the block set B that contains all the triples in the STS
+        /// Constructs the block set B that contains all the triples in the STS(v)
         /// </summary>
         /// <param name="v">Number of vertices</param>
         /// <param name="Other">Array that keeps track of the third point in a block containing x and y</param>
@@ -87,16 +94,14 @@ namespace GraphDecomposition.Algorithms
         {
             int arraySize = v + 1;
 
-            #region Array initialisation
             LivePoints = new int[arraySize];
             IndexLivePoints = new int[arraySize];
-            NumLivePairs = new int[arraySize];
 
             LivePairs = new int[arraySize, arraySize];
+            NumLivePairs = new int[arraySize];
             IndexLivePairs = new int[arraySize, arraySize];
 
-            Other = new int[arraySize, arraySize]; 
-            #endregion
+            Other = new int[arraySize, arraySize];
 
             NumLivePoints = v;
 
@@ -108,12 +113,12 @@ namespace GraphDecomposition.Algorithms
 
                 for (int y = 1; y <= v - 1; y++)
                 {
-                    LivePairs[x, y] = (y + x - 1) % v + 1;
+                    LivePairs[x, y] = ((y + x - 1) % v) + 1;
                 }
 
-                for (int y = 01; y <= v; y++)
+                for (int y = 1; y <= v; y++)
                 {
-                    IndexLivePairs[x, y] = (y - x) % v;
+                    IndexLivePairs[x, y] = Math.Abs((y - x) % v);  //check if abs ???
                     Other[x, y] = 0;
                 }
 
@@ -122,7 +127,7 @@ namespace GraphDecomposition.Algorithms
         }
 
         /// <summary>
-        /// Performs the insertion of a pair in the arrays
+        /// Gives the pair a status of a live pair
         /// </summary>
         /// <param name="x">First vertex</param>
         /// <param name="y">Second vertex</param>
@@ -142,14 +147,14 @@ namespace GraphDecomposition.Algorithms
         }
 
         /// <summary>
-        /// Performs the deletion of a pair in the arrays
+        /// Removes the Live Pair entry from the first vertex for the second vertex
         /// </summary>
         /// <param name="x">First vertex</param>
         /// <param name="y">Second vertex</param>
         private void DeletePair(int x, int y)
         {
-            int posn = IndexLivePairs[x, y];
-            int num = NumLivePairs[x];
+            int posn = IndexLivePairs[x, y];    //LivePairs[x, posn] = y -> IndexLivePairs[x, y] = posn
+            int num = NumLivePairs[x];          //NumLivePairs[x] = num -> posn of the last entry in the LivePairs array
             int z = LivePairs[x, num];
             LivePairs[x, posn] = z;
             IndexLivePairs[x, z] = posn;
@@ -242,7 +247,6 @@ namespace GraphDecomposition.Algorithms
             int y = LivePairs[x, s];
             int z = LivePairs[x, t];
 
-            int NumBlocks = 0;
             int w = 0;
 
             if (Other[y, z] == 0)
@@ -254,12 +258,12 @@ namespace GraphDecomposition.Algorithms
             {
                 w = Other[y, z];
                 ExchangeBlock(x, y, z, w);
-            } 
+            }
         }
 
         private Triple[] StinsonsAlgorithm(int v)
         {
-            int NumBlocks = 0;
+            NumBlocks = 0;
             Initialize(v);
 
             while (NumBlocks < v * (v - 1) / 6)
