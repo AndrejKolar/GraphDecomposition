@@ -121,6 +121,52 @@ namespace GraphDecomposition.Algorithms
             }
         }
 
+        /// <summary>
+        /// Performs the insertion of a pair in the arrays
+        /// </summary>
+        /// <param name="x">First vertex</param>
+        /// <param name="y">Second vertex</param>
+        private void InsertPair(int x, int y)
+        {
+            if (NumLivePairs[x] == 0)
+            {
+                NumLivePoints = NumLivePoints + 1;
+                LivePoints[NumLivePoints] = x;
+                IndexLivePoints[x] = NumLivePoints;
+            }
 
+            NumLivePairs[x] = NumLivePairs[x] + 1;
+            int posn = NumLivePairs[x];
+            LivePairs[x, posn] = y;
+            IndexLivePairs[x, y] = posn;
+        }
+
+        /// <summary>
+        /// Performs the deletion of a pair in the arrays
+        /// </summary>
+        /// <param name="x">First vertex</param>
+        /// <param name="y">Second vertex</param>
+        private void DeletePair(int x, int y)
+        {
+            int posn = IndexLivePairs[x, y];
+            int num = NumLivePairs[x];
+            int z = LivePairs[x, num];
+            LivePairs[x, posn] = z;
+            IndexLivePairs[x, z] = posn;
+            LivePairs[x, num] = 0;
+            IndexLivePairs[x, y] = 0;
+            NumLivePairs[x] = NumLivePairs[x] - 1;
+
+            if (NumLivePairs[x] == 0)
+            {
+                posn = IndexLivePoints[x];
+                z = LivePoints[NumLivePoints];
+                LivePoints[posn] = z;
+                IndexLivePoints[z] = posn;
+                LivePoints[NumLivePoints] = 0;
+                IndexLivePoints[x] = 0;
+                NumLivePoints = NumLivePoints - 1;
+            }
+        }
     }
 }
