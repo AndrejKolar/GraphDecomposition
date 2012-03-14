@@ -168,5 +168,60 @@ namespace GraphDecomposition.Algorithms
                 NumLivePoints = NumLivePoints - 1;
             }
         }
+
+        /// <summary>
+        /// Creates a block of three vertices
+        /// </summary>
+        /// <param name="x">First vertex</param>
+        /// <param name="y">Second vertex</param>
+        /// <param name="z">Third vertex</param>
+        private void AddBlock(int x, int y, int z)
+        {
+            Other[x, y] = z;
+            Other[y, x] = z;
+            Other[x, z] = y;
+            Other[z, x] = y;
+            Other[y, z] = x;
+            Other[z, y] = x;
+
+            DeletePair(x, y);
+            DeletePair(y, x);
+            DeletePair(x, z);
+            DeletePair(z, x);
+            DeletePair(y, z);
+            DeletePair(z, y);
+        }
+
+        /// <summary>
+        /// Exchanges an old vertex in a block with a new vertex
+        /// </summary>
+        /// <param name="x">New vertex</param>
+        /// <param name="y">Second vertex</param>
+        /// <param name="z">Third vertex</param>
+        /// <param name="w">Old vertex</param>
+        private void ExchangeBlock(int x, int y, int z, int w)
+        {
+            Other[x, y] = z;
+            Other[y, x] = z;
+            Other[x, z] = y;
+            Other[z, x] = y;
+            Other[y, z] = x;
+            Other[z, y] = x;
+
+            Other[w, y] = 0;
+            Other[y, w] = 0;
+            Other[w, z] = 0;
+            Other[z, w] = 0;
+
+            InsertPair(w, y);
+            InsertPair(y, w);
+            InsertPair(w, z);
+            InsertPair(z, w);
+
+            DeletePair(x, y);
+            DeletePair(y, x);
+            DeletePair(x, z);
+            DeletePair(z, x);
+        }
     }
 }
