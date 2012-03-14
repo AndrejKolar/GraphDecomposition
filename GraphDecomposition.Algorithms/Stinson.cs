@@ -12,25 +12,50 @@ namespace GraphDecomposition.Algorithms
         /// <summary>
         /// Number of vertices in a graph
         /// </summary>
-        int v;
+        private int v;
 
         /// <summary>
         /// Number of triples in a STS
         /// </summary>
-        int b;
+        private int b;
+
+        /// <summary>
+        /// LivePoints array contains all the live points 
+        /// </summary>
+        private int[] LivePoints;
+        private int[] IndexLivePoints;
+        private int NumLivePoints;
+
+        /// <summary>
+        /// LivePairs array contains for each live point an array of all the points that make a live pair with that point
+        /// </summary>
+        private int[,] LivePairs;
+        private int[,] IndexLivePairs;
+        private int[] NumLivePairs;
+
 
         /// <summary>
         /// Array that keeps track of the third point in a block containing x and y 
         /// </summary>
         int[,] Other;
 
+        /// <summary>
+        /// Starts the algorithm
+        /// </summary>
+        /// <param name="v">Number of vertices in a complete graph.</param>
         public void StartAlgorithm(int v)
         {
             this.v = v;
             this.b = v * (v - 1) / 6;
         }
 
-        private Triple[] ConstructBlocks()
+        /// <summary>
+        /// Constructs the block set B that contains all the triples in the STS
+        /// </summary>
+        /// <param name="v">Number of vertices</param>
+        /// <param name="Other">Array that keeps track of the third point in a block containing x and y</param>
+        /// <returns></returns>
+        private Triple[] ConstructBlocks(int v, int[,] Other)
         {
             Triple[] B = new Triple[b];
 
@@ -53,5 +78,49 @@ namespace GraphDecomposition.Algorithms
 
             return B;
         }
+
+        /// <summary>
+        /// Initailises the arrays at at the begining of the hill-climbing algorithm
+        /// </summary>
+        /// <param name="v">Number of vertices in the complete graph</param>
+        private void Initialize(int v)
+        {
+            int arraySize = v + 1;
+
+            #region Array initialisation
+            LivePoints = new int[arraySize];
+            IndexLivePoints = new int[arraySize];
+            NumLivePairs = new int[arraySize];
+
+            LivePairs = new int[arraySize, arraySize];
+            IndexLivePairs = new int[arraySize, arraySize];
+
+            Other = new int[arraySize, arraySize]; 
+            #endregion
+
+            NumLivePoints = v;
+
+            for (int x = 1; x <= v; x++)
+            {
+                LivePoints[x] = x;
+                IndexLivePoints[x] = x;
+                NumLivePairs[x] = v - 1;
+
+                for (int y = 1; y <= v - 1; y++)
+                {
+                    LivePairs[x, y] = (y + x - 1) % v + 1;
+                }
+
+                for (int y = 01; y <= v; y++)
+                {
+                    IndexLivePairs[x, y] = (y - x) % v;
+                    Other[x, y] = 0;
+                }
+
+
+            }
+        }
+
+
     }
 }
