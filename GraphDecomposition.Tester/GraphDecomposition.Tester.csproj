@@ -47,9 +47,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraphDecomposition.HillClimbing\GraphDecomposition.HillClimbing.csproj">
-      <Project>{4A3261EE-60A5-4CB2-B30A-BE8FD5A8FBCD}</Project>
-      <Name>GraphDecomposition.HillClimbing</Name>
+    <ProjectReference Include="..\GraphDecomposition.Algorithms\GraphDecomposition.Algorithms.csproj">
+      <Project>{DD8686EB-A464-4611-B836-A77256786272}</Project>
+      <Name>GraphDecomposition.Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphDecomposition.Utils\GraphDecomposition.Utils.csproj">
+      <Project>{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}</Project>
+      <Name>GraphDecomposition.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

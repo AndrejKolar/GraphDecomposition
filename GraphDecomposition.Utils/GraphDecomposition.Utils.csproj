@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DD8686EB-A464-4611-B836-A77256786272}</ProjectGuid>
+    <ProjectGuid>{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GraphDecomposition.Algorithms</RootNamespace>
-    <AssemblyName>GraphDecomposition.Algorithms</AssemblyName>
+    <RootNamespace>GraphDecomposition.Utils</RootNamespace>
+    <AssemblyName>GraphDecomposition.Utils</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stinson.cs" />
+    <Compile Include="VertexUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
