@@ -14,7 +14,7 @@ namespace GraphDecomposition.Tester
         {
             Stinson aStinson = new Stinson();
 
-            int numVertex = 7;
+            int numVertex = 9;
 
             if (VertexUtils.CanDecomposeGraph(numVertex))
             {

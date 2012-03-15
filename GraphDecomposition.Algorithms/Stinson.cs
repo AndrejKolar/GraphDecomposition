@@ -121,7 +121,7 @@ namespace GraphDecomposition.Algorithms
                     int index = (y - x);
                     if (index < 0)
                     {
-                        index += 7;
+                        index += v;
                     }
 
                     IndexLivePairs[x, y] = index; 
