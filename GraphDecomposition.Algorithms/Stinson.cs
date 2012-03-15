@@ -118,7 +118,13 @@ namespace GraphDecomposition.Algorithms
 
                 for (int y = 1; y <= v; y++)
                 {
-                    IndexLivePairs[x, y] = Math.Abs((y - x) % v);  //check if abs ???
+                    int index = (y - x);
+                    if (index < 0)
+                    {
+                        index += 7;
+                    }
+
+                    IndexLivePairs[x, y] = index; 
                     Other[x, y] = 0;
                 }
 
@@ -198,7 +204,7 @@ namespace GraphDecomposition.Algorithms
         }
 
         /// <summary>
-        /// Exchanges an old vertex in a block with a new vertex
+        /// Removes an old vertex from a block and inserts a new vertex
         /// </summary>
         /// <param name="x">New vertex</param>
         /// <param name="y">Second vertex</param>
@@ -241,6 +247,7 @@ namespace GraphDecomposition.Algorithms
 
             int x = LivePoints[r];
 
+            //1 <= s < t <= NumLivePairs[x]
             int t = rand.Next(2, NumLivePairs[x] + 1);
             int s = rand.Next(1, t);
 
