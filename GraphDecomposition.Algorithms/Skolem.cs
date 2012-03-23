@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GraphDecomposition.Algorithms
 {
-    class Skolem
+    public class Skolem
     {
     }
 }

@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bose.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Skolem.cs" />
     <Compile Include="Stinson.cs" />
   </ItemGroup>
   <ItemGroup>
