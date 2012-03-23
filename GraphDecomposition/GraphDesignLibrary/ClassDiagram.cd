@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GraphDesignLibrary.GraphElement">
+    <Position X="2" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAQAAAAEAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Graph Elements\GraphElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphDesignLibrary.Vertex">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAgAAAAAAAAAAAAAAAIAAAAGAAAQBAAAE=</HashCode>
+      <FileName>Graph Elements\Vertex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphDesignLibrary.Edge">
+    <Position X="2.75" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAABAAAgAQA=</HashCode>
+      <FileName>Graph Elements\Edge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphDesignLibrary.CompleteGraph">
+    <Position X="5.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\CompleteGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphDesignLibrary.Graph">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAIAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Graphs\Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphDesignLibrary.BoseConstruction">
+    <Position X="6.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>STS\BoseConstruction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphDesignLibrary.SkolemConstruction">
+    <Position X="9" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAABAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>STS\SkolemConstruction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphDesignLibrary.SteinerTripleSystem">
+    <Position X="7.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAABAAAAAAIAAAAAAAAiAAAAIAAAACAAAAAoAAA=</HashCode>
+      <FileName>STS\SteinerTripleSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="GraphDesignLibrary.Triple">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQEAAAEBAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>STS\Triple.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
