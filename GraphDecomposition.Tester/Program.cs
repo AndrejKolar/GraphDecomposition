@@ -16,7 +16,7 @@ namespace GraphDecomposition.Tester
 
             int numVertex = 9;
 
-            if (VertexUtils.CanDecomposeGraph(numVertex))
+            if (GraphUtils.CanDecomposeGraph(numVertex))
             {
                 aStinson.StartAlgorithm(numVertex);
             }
