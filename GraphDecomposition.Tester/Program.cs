@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using GraphDecomposition.Algorithms;
-using GraphDecomposition.Utils;
 using GraphDecomposition.GraphElements;
 
 namespace GraphDecomposition.Tester
