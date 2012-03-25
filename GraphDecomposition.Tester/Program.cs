@@ -15,10 +15,11 @@ namespace GraphDecomposition.Tester
         {
             Stinson aStinson = new Stinson();
             Skolem aSkolem = new Skolem();
+            Bose aBose = new Bose();
 
-            int numVertex = 7;
+            int numVertex = 9;
 
-            SteinerTripleSystem sts = aSkolem.StartAlgorithm(numVertex);
+            SteinerTripleSystem sts = aBose.StartAlgorithm(numVertex);
 
             foreach (Triple t in sts)
             {
@@ -26,7 +27,7 @@ namespace GraphDecomposition.Tester
                 Console.Write(t.X);
                 Console.Write(t.Y);
                 Console.Write(t.Z);
-                Console.WriteLine("");
+                Console.WriteLine("|");
             }
 
             
