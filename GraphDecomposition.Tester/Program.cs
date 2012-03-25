@@ -5,6 +5,7 @@ using System.Text;
 
 using GraphDecomposition.Algorithms;
 using GraphDecomposition.Utils;
+using GraphDecomposition.GraphElements;
 
 namespace GraphDecomposition.Tester
 {
@@ -13,12 +14,19 @@ namespace GraphDecomposition.Tester
         static void Main(string[] args)
         {
             Stinson aStinson = new Stinson();
+            Skolem aSkolem = new Skolem();
 
-            int numVertex = 9;
+            int numVertex = 7;
 
-            if (GraphUtils.CanDecomposeGraph(numVertex))
+            SteinerTripleSystem sts = aSkolem.StartAlgorithm(numVertex);
+
+            foreach (Triple t in sts)
             {
-                aStinson.StartAlgorithm(numVertex);
+                Console.Write("|");
+                Console.Write(t.X);
+                Console.Write(t.Y);
+                Console.Write(t.Z);
+                Console.WriteLine("");
             }
 
             
