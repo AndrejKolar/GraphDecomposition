@@ -20,15 +20,15 @@ namespace GraphDecomposition.GraphElements
         /// <summary>
         /// Constructor initialises the STS(v) with the number of vertices
         /// </summary>
-        /// <param name="size">Number of vertices</param>
-        public SteinerTripleSystem(int size)
+        /// <param name="b">Number of triples</param>
+        public SteinerTripleSystem(int b)
         {
-            this.tripleList = new Triple[size];
+            this.tripleList = new Triple[b];
             this.index = 0;
         }
 
         /// <summary>
-        /// Used to fetch all the triples
+        /// Iterator used to fetch all the triples
         /// </summary>
         /// <returns>A triple from the STS(v)</returns>
         public IEnumerator GetEnumerator()
