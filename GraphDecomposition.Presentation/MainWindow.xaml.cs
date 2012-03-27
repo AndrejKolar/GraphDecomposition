@@ -22,9 +22,6 @@ namespace GraphDecomposition.Presentation
         private Regex isNum = new Regex("^[0-9]+$");   //to check if input is Int
         private bool createButtonClicked = false;
 
-        //private CompleteGraph myGraph;
-        //private SteinerTripleSystem mySTS;
-
         private int index = 0;
 
         private int numVertex;
@@ -250,17 +247,20 @@ namespace GraphDecomposition.Presentation
 
         void Vertex_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            //Ellipse vertex = (Ellipse)sender;
+            Ellipse vertex = (Ellipse)sender;
 
-            //String name = "This is vertex: (";
-            //for (int i = 1; i < vertex.Name.Length-1; i++)
-            //{
-            //    name += vertex.Name[i];
-            //}
+            String name = "This is vertex: ";
 
-            //name += "," + vertex.Name[vertex.Name.Length-1] + ")";
+            foreach (KeyValuePair<String, Ellipse> pair in vertexDictionary)
+            {
+                if (vertex.Equals(pair.Value))
+                {
+                    name += pair.Key;
+                    break;
+                }
+            }
 
-            //statusLabel.Content = name;
+            this.statusLabel.Content = name;
         }
 
 
