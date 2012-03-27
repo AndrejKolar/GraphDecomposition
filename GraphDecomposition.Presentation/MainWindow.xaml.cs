@@ -189,9 +189,24 @@ namespace GraphDecomposition.Presentation
         }
 
 
-        private Line createNewEdge(int firstVertex, int secondVertex)
+        private Line createNewEdge(int x, int y)
         {
-            return null;
+            const double VERTEX_SIZE = 5;
+
+            Ellipse firstVertex = this.vertexDictionary[x.ToString()];
+            Ellipse secondVertex = this.vertexDictionary[y.ToString()];
+
+            Line newEdge = new Line()
+            {
+                Stroke = new SolidColorBrush(Colors.Black),
+                X1 = Canvas.GetLeft(firstVertex) + (VERTEX_SIZE / 2),
+                X2 = Canvas.GetLeft(secondVertex) + (VERTEX_SIZE / 2),
+                Y1 = Canvas.GetTop(firstVertex) + (VERTEX_SIZE / 2),
+                Y2 = Canvas.GetTop(secondVertex) + (VERTEX_SIZE / 2)
+            };
+
+
+            return newEdge;
         }
 
         private Ellipse createNewVertex(int vertexNumber, int countVertex)
