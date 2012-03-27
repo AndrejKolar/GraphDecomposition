@@ -5,10 +5,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 using GraphDecomposition.Algorithms;
 using GraphDecomposition.GraphElements;
 using GraphDecomposition.Utils;
+using GraphDecomposition.Interfaces;
 
 namespace GraphDecomposition.Presentation
 {
@@ -19,10 +21,15 @@ namespace GraphDecomposition.Presentation
     {
         private Regex isNum = new Regex("^[0-9]+$");   //to check if input is Int
         private bool createButtonClicked = false;
-        
+
         //private CompleteGraph myGraph;
         //private SteinerTripleSystem mySTS;
         private int index = 0;
+
+        private IDecompositionAlgorithm algorithm;
+
+        private Dictionary<String, Ellipse> vertexDictionary = new Dictionary<string,Ellipse>();
+        private Dictionary<String, Line> edgeDictionary = new Dictionary<string,Line>();
 
         private DoubleAnimation opacityAnimEdgeF;
         private DoubleAnimation opacityAnimVertexF;
@@ -59,7 +66,7 @@ namespace GraphDecomposition.Presentation
             {
                 From = Colors.Black,
                 To = Colors.Red,
-                Duration = TimeSpan.FromSeconds(0.3)                
+                Duration = TimeSpan.FromSeconds(0.3)
             };
 
             animatedBrushForward = new SolidColorBrush() { Color = Colors.Black };
@@ -79,7 +86,7 @@ namespace GraphDecomposition.Presentation
                 To = Colors.Black,
             };
 
-            animatedBrushBack = new SolidColorBrush() { Color = Colors.Red }; 
+            animatedBrushBack = new SolidColorBrush() { Color = Colors.Red };
             #endregion
         }
 
@@ -127,8 +134,11 @@ namespace GraphDecomposition.Presentation
         {
             if (isNum.IsMatch(textBoxInput.Text))
             {
-                //int numVertices = Int16.Parse(textBoxInput.Text);
-                //myGraph = new CompleteGraph(numVertices);
+                int numVertex = Int16.Parse(textBoxInput.Text);
+
+                drawGraph(numVertex);
+
+                //myGraph = new CompleteGraph(numVertex);
 
                 //myGraph.SetElementCoordinates(canvasMain.ActualWidth / 2, canvasMain.ActualHeight / 2);
 
@@ -142,6 +152,68 @@ namespace GraphDecomposition.Presentation
             }
 
 
+        }
+
+        private void drawGraph(int numVertex)
+        {
+            this.canvasMain.Children.Clear();
+
+            //create vertices
+            for (int i = 1; i <= numVertex; i++)
+            {
+                Ellipse newVertex = createNewVertex(i, numVertex);
+
+                newVertex.MouseEnter += new System.Windows.Input.MouseEventHandler(Vertex_MouseEnter);
+                this.vertexDictionary.Add(i.ToString(), newVertex);
+                this.canvasMain.Children.Add(newVertex);
+            }
+
+            //create edges
+            for (int i = 1; i <= numVertex; i++)
+            {
+                for (int j = 1; j <= numVertex; j++)
+                {
+                    //skip edges that would connect to the same vertex
+                    if (i == j)
+                    {
+                        continue;
+                    }
+
+                    Line newEdge = createNewEdge(i, j);
+                    this.edgeDictionary.Add(i.ToString() + "_" + j.ToString(), newEdge);
+                    this.canvasMain.Children.Add(newEdge);
+                }
+            }
+
+            this.statusLabel.Content = "Begin decomposition";
+        }
+
+
+        private Line createNewEdge(int firstVertex, int secondVertex)
+        {
+            return null;
+        }
+
+        private Ellipse createNewVertex(int vertexNumber, int countVertex)
+        {
+            const double VERTEX_SIZE = 5;
+
+            double canvasX = this.canvasMain.ActualWidth / 2;
+            double canvasY = this.canvasMain.ActualHeight / 2;
+
+            double GRAPH_SIZE = System.Math.Min(canvasX / 2, canvasY / 2); //određivanje veličine grafa
+
+            double coordinateRad = vertexNumber * 360 / countVertex * System.Math.PI / 180;
+
+            double coordinateX = canvasX + GRAPH_SIZE * System.Math.Cos(coordinateRad);
+            double coordinateY = canvasY + GRAPH_SIZE * System.Math.Sin(coordinateRad);
+
+            Ellipse newVertex = new Ellipse { Height = VERTEX_SIZE, Width = VERTEX_SIZE, Stroke = new SolidColorBrush(Colors.Black) };
+
+            newVertex.SetValue(Canvas.LeftProperty, coordinateX);
+            newVertex.SetValue(Canvas.TopProperty, coordinateY);
+
+            return newVertex;
         }
 
         //private void DrawGraph(CompleteGraph myGraph)
@@ -175,11 +247,32 @@ namespace GraphDecomposition.Presentation
             //name += "," + vertex.Name[vertex.Name.Length-1] + ")";
 
             //statusLabel.Content = name;
-        } 
+        }
 
 
         private void buttonDecompose_Click(object sender, RoutedEventArgs e)
         {
+            //NEW CODE !!!
+
+            ////creates an algorithm object and runs the algorithm
+            //switch (GraphUtils.ChooseConstruction(numVertices))
+            //{
+            //    case ConstructionType.Bose:
+            //        this.algorithm = new Bose();
+            //        this.algorithm.StartAlgorithm(numVertices);
+            //        break;
+            //    case ConstructionType.Skolem:
+            //        this.algorithm = new Skolem();
+            //        this.algorithm.StartAlgorithm(numVertices);
+            //        break;
+            //    case ConstructionType.None:
+            //        MessageBox.Show("Cannot decompose a graph with this number of vertices", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+
             //if (myGraph == null)   //graph has not been created
             //{
             //    MessageBox.Show("Please create a graph before decomposition.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -204,7 +297,7 @@ namespace GraphDecomposition.Presentation
             //buttonNextTriple.Visibility = Visibility.Visible;
             //buttonPrevTriple.Visibility = Visibility.Visible;            
 
-        } 
+        }
 
         private void buttonNextTriple_Click(object sender, RoutedEventArgs e)
         {
@@ -295,7 +388,7 @@ namespace GraphDecomposition.Presentation
             //AnimEdge(firstV, thirdV, opacityAnimBack, animatedBrushBack, colorAnimBack);
             //AnimEdge(secondV, thirdV, opacityAnimBack, animatedBrushBack, colorAnimBack);
 
-        } 
+        }
 
         //private void AnimVertex(Vertex vertex, DoubleAnimation opacityAnim)
         //{
@@ -355,9 +448,9 @@ namespace GraphDecomposition.Presentation
         //        return false;
         //    }
         //}        
-       
+
 
     }
 
-    
+
 }
