@@ -189,7 +189,7 @@ namespace GraphDecomposition.Presentation
             }
             else
             {
-                return i.ToString() + "_" + j.ToString();
+                return j.ToString() + "_" + i.ToString();
             }
             
         }
@@ -266,8 +266,8 @@ namespace GraphDecomposition.Presentation
 
         private void buttonDecompose_Click(object sender, RoutedEventArgs e)
         {
-            bool isGraphCreated = this.canvasMain.Children.Count > 0;
-            if (isGraphCreated)   //graph has not been created
+            bool noGraphCreated = this.canvasMain.Children.Count == 0;
+            if (noGraphCreated)   //graph has not been created
             {
                 MessageBox.Show("Please create a graph before decomposition.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
