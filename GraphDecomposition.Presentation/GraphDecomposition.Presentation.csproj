@@ -118,6 +118,20 @@
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphDecomposition.Algorithms\GraphDecomposition.Algorithms.csproj">
+      <Project>{DD8686EB-A464-4611-B836-A77256786272}</Project>
+      <Name>GraphDecomposition.Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphDecomposition.GraphElements\GraphDecomposition.GraphElements.csproj">
+      <Project>{50663050-C076-46AD-8F10-9116B635F7CE}</Project>
+      <Name>GraphDecomposition.GraphElements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphDecomposition.Utils\GraphDecomposition.Utils.csproj">
+      <Project>{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}</Project>
+      <Name>GraphDecomposition.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

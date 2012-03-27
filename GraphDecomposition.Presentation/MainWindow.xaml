@@ -1,7 +1,7 @@
 ﻿<Window x:Class="GraphDecomposition.Presentation.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Graph|Decomposition" Height="404" Width="633" Icon="/GraphPresentation;component/Icon.ico">
+    Title="Graph|Decomposition" Height="404" Width="633" Icon="/GraphDecomposition.Presentation;component/Icon.ico">
     <Grid Name="gridMain" ClipToBounds="True" Width="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="33*"/>

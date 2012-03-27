@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace GraphPresentation
+namespace GraphDecomposition.Presentation
 {
     /// <summary>
     /// Interaction logic for App.xaml
