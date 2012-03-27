@@ -6,7 +6,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-
 namespace GraphDecomposition.Presentation
 {
     /// <summary>
@@ -14,7 +13,6 @@ namespace GraphDecomposition.Presentation
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Fields
         private Regex isNum = new Regex("^[0-9]+$");   //to check if input is Int
         private bool createButtonClicked = false;
         
@@ -29,7 +27,7 @@ namespace GraphDecomposition.Presentation
         private DoubleAnimation opacityAnimBack;
         private ColorAnimation colorAnimBack;
         private SolidColorBrush animatedBrushBack;
-        #endregion
+
 
         public MainWindow()
         {
@@ -83,61 +81,61 @@ namespace GraphDecomposition.Presentation
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-            //if (createButtonClicked == false)  //toggle vertices number display
-            //{
-            //    OpenInputSection();
-            //}
-            //else
-            //{
-            //    CloseInputSection();
-            //}
+            if (createButtonClicked == false)  //toggle vertices number display
+            {
+                OpenInputSection();
+            }
+            else
+            {
+                CloseInputSection();
+            }
 
         }
 
         private void CloseInputSection()
         {
-            //createButtonClicked = false;
+            createButtonClicked = false;
 
-            //Grid.SetRow(buttonDecompose, 3);
+            Grid.SetRow(buttonDecompose, 3);
 
-            //labelInput1.Visibility = Visibility.Hidden;
-            //labelInput2.Visibility = Visibility.Hidden;
-            //textBoxInput.Visibility = Visibility.Hidden;
-            //buttonDrawGraph.Visibility = Visibility.Hidden;
-            //textBoxInput.Text = "";
+            labelInput1.Visibility = Visibility.Hidden;
+            labelInput2.Visibility = Visibility.Hidden;
+            textBoxInput.Visibility = Visibility.Hidden;
+            buttonDrawGraph.Visibility = Visibility.Hidden;
+            textBoxInput.Text = "";
         }
 
         private void OpenInputSection()
         {
-            //createButtonClicked = true;
+            createButtonClicked = true;
 
-            //Grid.SetRow(buttonDecompose, 9); //set row of a button in a grid
+            Grid.SetRow(buttonDecompose, 9); //set row of a button in a grid
 
-            //labelInput1.Visibility = Visibility.Visible;
-            //labelInput2.Visibility = Visibility.Visible;
-            //textBoxInput.Visibility = Visibility.Visible;
-            //buttonDrawGraph.Visibility = Visibility.Visible;
-            //buttonNextTriple.Visibility = Visibility.Hidden;
-            //buttonPrevTriple.Visibility = Visibility.Hidden;
+            labelInput1.Visibility = Visibility.Visible;
+            labelInput2.Visibility = Visibility.Visible;
+            textBoxInput.Visibility = Visibility.Visible;
+            buttonDrawGraph.Visibility = Visibility.Visible;
+            buttonNextTriple.Visibility = Visibility.Hidden;
+            buttonPrevTriple.Visibility = Visibility.Hidden;
         }
 
         private void buttonDrawGraph_Click(object sender, RoutedEventArgs e)
         {
-            //if (isNum.IsMatch(textBoxInput.Text))
-            //{
-            //    //int numVertices = Int16.Parse(textBoxInput.Text);
-            //    //myGraph = new CompleteGraph(numVertices);
+            if (isNum.IsMatch(textBoxInput.Text))
+            {
+                //int numVertices = Int16.Parse(textBoxInput.Text);
+                //myGraph = new CompleteGraph(numVertices);
 
-            //    //myGraph.SetElementCoordinates(canvasMain.ActualWidth / 2, canvasMain.ActualHeight / 2);
+                //myGraph.SetElementCoordinates(canvasMain.ActualWidth / 2, canvasMain.ActualHeight / 2);
 
-            //    //DrawGraph(myGraph);
+                //DrawGraph(myGraph);
 
-            //    //index = 0; //set the index of the current triple to beginning
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Error inputing number of vertices.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
+                //index = 0; //set the index of the current triple to beginning
+            }
+            else
+            {
+                MessageBox.Show("Error inputing number of vertices.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
 
         }
