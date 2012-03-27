@@ -47,5 +47,27 @@ namespace GraphDecomposition.GraphElements
             this.tripleList[this.index] = new Triple(x, y, z);
             index++;
         }
+
+        /// <summary>
+        /// Gets the number of triples in the STS(v)
+        /// </summary>
+        /// <returns>Number of triples</returns>
+        public int Count()
+        {
+            return tripleList.Length;
+        }
+
+        /// <summary>
+        /// Gets the triple with the specifiedw index
+        /// </summary>
+        /// <param name="index">Index of the triple</param>
+        /// <returns>Triple with the specidied index</returns>
+        public Triple Element(int index)
+        {
+            return tripleList[index];
+        }
+
+
+            
     }
 }

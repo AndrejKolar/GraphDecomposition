@@ -24,14 +24,17 @@ namespace GraphDecomposition.Presentation
 
         //private CompleteGraph myGraph;
         //private SteinerTripleSystem mySTS;
-        //private int index = 0;
+
+        private int index = 0;
 
         private int numVertex;
 
+        private SteinerTripleSystem sts;
+
         private IDecompositionAlgorithm algorithm;
 
-        private Dictionary<String, Ellipse> vertexDictionary = new Dictionary<string,Ellipse>();
-        private Dictionary<String, Line> edgeDictionary = new Dictionary<string,Line>();
+        private Dictionary<String, Ellipse> vertexDictionary = new Dictionary<string, Ellipse>();
+        private Dictionary<String, Line> edgeDictionary = new Dictionary<string, Line>();
 
         private DoubleAnimation opacityAnimEdgeF;
         private DoubleAnimation opacityAnimVertexF;
@@ -96,16 +99,16 @@ namespace GraphDecomposition.Presentation
         {
             if (createButtonClicked == false)  //toggle vertices number display
             {
-                OpenInputSection();
+                openInputSection();
             }
             else
             {
-                CloseInputSection();
+                closeInputSection();
             }
 
         }
 
-        private void CloseInputSection()
+        private void closeInputSection()
         {
             createButtonClicked = false;
 
@@ -118,7 +121,7 @@ namespace GraphDecomposition.Presentation
             textBoxInput.Text = "";
         }
 
-        private void OpenInputSection()
+        private void openInputSection()
         {
             createButtonClicked = true;
 
@@ -163,7 +166,7 @@ namespace GraphDecomposition.Presentation
         {
             for (int i = 1; i <= this.numVertex; i++)
             {
-                for (int j = 1; j <= this.numVertex; j++)
+                for (int j = i + 1; j <= this.numVertex; j++)
                 {
                     //skip edges that would connect to the same vertex
                     if (i == j)
@@ -172,10 +175,23 @@ namespace GraphDecomposition.Presentation
                     }
 
                     Line newEdge = createNewEdge(i, j);
-                    this.edgeDictionary.Add(i.ToString() + "_" + j.ToString(), newEdge);
+                    this.edgeDictionary.Add(getEdgeName(i, j), newEdge);
                     this.canvasMain.Children.Add(newEdge);
                 }
             }
+        }
+
+        private static string getEdgeName(int i, int j)
+        {
+            if (i < j)
+            {
+                return i.ToString() + "_" + j.ToString();
+            }
+            else
+            {
+                return i.ToString() + "_" + j.ToString();
+            }
+            
         }
 
         private void createVertices()
@@ -189,7 +205,6 @@ namespace GraphDecomposition.Presentation
                 this.canvasMain.Children.Add(newVertex);
             }
         }
-
 
         private Line createNewEdge(int x, int y)
         {
@@ -251,94 +266,73 @@ namespace GraphDecomposition.Presentation
 
         private void buttonDecompose_Click(object sender, RoutedEventArgs e)
         {
-            //NEW CODE !!!
+            bool isGraphCreated = this.canvasMain.Children.Count > 0;
+            if (isGraphCreated)   //graph has not been created
+            {
+                MessageBox.Show("Please create a graph before decomposition.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            ////creates an algorithm object and runs the algorithm
-            //switch (GraphUtils.ChooseConstruction(numVertices))
-            //{
-            //    case ConstructionType.Bose:
-            //        this.algorithm = new Bose();
-            //        this.algorithm.StartAlgorithm(numVertices);
-            //        break;
-            //    case ConstructionType.Skolem:
-            //        this.algorithm = new Skolem();
-            //        this.algorithm.StartAlgorithm(numVertices);
-            //        break;
-            //    case ConstructionType.None:
-            //        MessageBox.Show("Cannot decompose a graph with this number of vertices", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //        break;
-            //    default:
-            //        break;
-            //}
+            //creates an algorithm object and runs the algorithm
+            switch (GraphUtils.ChooseConstruction(this.numVertex))
+            {
+                case ConstructionType.Bose:
+                    this.algorithm = new Bose();
+                    this.sts = this.algorithm.StartAlgorithm(this.numVertex);
+                    break;
+                case ConstructionType.Skolem:
+                    this.algorithm = new Skolem();
+                    this.sts = this.algorithm.StartAlgorithm(this.numVertex);
+                    break;
+                case ConstructionType.None:
+                    MessageBox.Show("Cannot decompose a graph with this number of vertices", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                default:
+                    break;
+            }
 
+            closeInputSection();
 
-            //if (myGraph == null)   //graph has not been created
-            //{
-            //    MessageBox.Show("Please create a graph before decomposition.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}
+            showDecompositionButtons();
 
-            //if (myGraph.Vertices.Count % 6 == 3 % 6)
-            //{
-            //    mySTS = new BoseConstruction(myGraph.Vertices.Count);
-            //}
-            //else if (myGraph.Vertices.Count % 6 == 1 % 6)
-            //{
-            //    mySTS = new SkolemConstruction(myGraph.Vertices.Count);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Cannot decompose this number of vertices", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}
+        }
 
-            //CloseInputSection();
-            //buttonNextTriple.Visibility = Visibility.Visible;
-            //buttonPrevTriple.Visibility = Visibility.Visible;            
-
+        private void showDecompositionButtons()
+        {
+            buttonNextTriple.Visibility = Visibility.Visible;
+            buttonPrevTriple.Visibility = Visibility.Visible;
         }
 
         private void buttonNextTriple_Click(object sender, RoutedEventArgs e)
         {
-            //if (index == mySTS.TripleList.Count)  //checks if it's the end of decomposition
-            //{
-            //    MessageBox.Show("You have reached the end of the decomposition.", "Status", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    statusLabel.Content = "Decomposition has ended.";
-            //    return;
-            //}
+            bool isEndOfDecomposition = this.index == this.sts.Count();
+            if (isEndOfDecomposition)
+            {
+                MessageBox.Show("You have reached the end of the decomposition.", "Status", MessageBoxButton.OK, MessageBoxImage.Information);
+                statusLabel.Content = "Decomposition has ended.";
+                return;
+            }
 
-            //Triple myTriple = mySTS.TripleList[index]; //read the next triple
+            Triple myTriple = this.sts.Element(this.index);
+            this.index++;
+            statusLabel.Content = "Removing triple from graph: (" + myTriple.X.ToString() + ", " + myTriple.Y.ToString() + ", " + myTriple.Z.ToString() + ")";
 
-            //statusLabel.Content = "Removing triple from graph: " + myTriple.FirstPair +" "+ myTriple.SecondPair +" "+ myTriple.ThirdPair;
 
-            //index++;
+            Ellipse firstVertex = this.vertexDictionary[myTriple.X.ToString()];
+            Ellipse secondVertex = this.vertexDictionary[myTriple.Y.ToString()];
+            Ellipse thirdVertex = this.vertexDictionary[myTriple.Z.ToString()];
 
-            //Vertex firstV = null;
-            //Vertex secondV = null;
-            //Vertex thirdV = null;   //finding the three vertices of a triple
-            //foreach (Vertex ver in myGraph.Vertices)
-            //{
-            //    if (ver.Name == myTriple.FirstPair)
-            //    {
-            //        firstV = ver;
-            //    }
-            //    if (ver.Name == myTriple.SecondPair)
-            //    {
-            //        secondV = ver;
-            //    }
-            //    if (ver.Name == myTriple.ThirdPair)
-            //    {
-            //        thirdV = ver;
-            //    }
-            //}
+            Line firstEdge = this.edgeDictionary[getEdgeName(myTriple.X, myTriple.Y)];
+            Line secondEdge = this.edgeDictionary[getEdgeName(myTriple.X, myTriple.Z)];
+            Line thirdEdge = this.edgeDictionary[getEdgeName(myTriple.Z, myTriple.Y)];
 
-            //AnimVertex(firstV, opacityAnimVertexF);
-            //AnimVertex(secondV, opacityAnimVertexF);
-            //AnimVertex(thirdV, opacityAnimVertexF);
+            AnimVertex(firstVertex, opacityAnimVertexF);
+            AnimVertex(secondVertex, opacityAnimVertexF);
+            AnimVertex(thirdVertex, opacityAnimVertexF);
 
-            //AnimEdge(firstV, secondV, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
-            //AnimEdge(firstV, thirdV, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
-            //AnimEdge(secondV, thirdV, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
+            AnimEdge(firstEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
+            AnimEdge(secondEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
+            AnimEdge(thirdEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
 
 
         }
@@ -389,65 +383,17 @@ namespace GraphDecomposition.Presentation
 
         }
 
-        //private void AnimVertex(Vertex vertex, DoubleAnimation opacityAnim)
-        //{
+        private void AnimVertex(Ellipse vertex, DoubleAnimation opacityAnim)
+        {
+            vertex.BeginAnimation(Ellipse.OpacityProperty, opacityAnim);
+        }
 
-
-        //    foreach (var elem in canvasMain.Children)
-        //    {
-
-        //        if (elem is Ellipse)
-        //        {
-        //            Ellipse myEllipse = (Ellipse)elem;
-
-        //            if (myEllipse.Name == vertex.ObjectName)
-        //            {
-        //                myEllipse.BeginAnimation(Ellipse.OpacityProperty, opacityAnim);
-        //            }
-        //        }
-        //    }
-
-        //}
-
-        //private void AnimEdge(Vertex firstV, Vertex secondV, DoubleAnimation opacityAnim, SolidColorBrush animatedBrush, ColorAnimation colorAnim)
-        //{
-
-        //    foreach (var elem in canvasMain.Children)
-        //    {
-
-        //        if (elem is Line)
-        //        {
-        //            Line myLine = (Line)elem;
-
-        //            if (CompareLineName(myLine, firstV, secondV))
-        //            {
-        //                Storyboard myBoard = new Storyboard();
-
-        //                animatedBrush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnim);
-        //                myLine.Stroke = animatedBrush;
-        //                myLine.BeginAnimation(Line.OpacityProperty, opacityAnim);
-        //            }
-        //        }
-
-        //    }
-        //}
-
-        //private bool CompareLineName(Line myLine, Vertex firstV, Vertex secondV)
-        //{
-        //    if (myLine.Name == "_" + firstV.ObjectName + secondV.ObjectName)
-        //    {
-        //        return true;
-        //    }
-        //    else if (myLine.Name == "_" + secondV.ObjectName + firstV.ObjectName)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}        
-
+        private void AnimEdge(Line edge, DoubleAnimation opacityAnim, SolidColorBrush animatedBrush, ColorAnimation colorAnim)
+        {
+            animatedBrush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnim);
+            edge.Stroke = animatedBrush;
+            edge.BeginAnimation(Line.OpacityProperty, opacityAnim);
+        }     
 
     }
 
