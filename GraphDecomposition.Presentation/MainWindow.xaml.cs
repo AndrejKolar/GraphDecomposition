@@ -24,7 +24,9 @@ namespace GraphDecomposition.Presentation
 
         //private CompleteGraph myGraph;
         //private SteinerTripleSystem mySTS;
-        private int index = 0;
+        //private int index = 0;
+
+        private int numVertex;
 
         private IDecompositionAlgorithm algorithm;
 
@@ -134,17 +136,9 @@ namespace GraphDecomposition.Presentation
         {
             if (isNum.IsMatch(textBoxInput.Text))
             {
-                int numVertex = Int16.Parse(textBoxInput.Text);
+                this.numVertex = Int16.Parse(textBoxInput.Text);
 
-                drawGraph(numVertex);
-
-                //myGraph = new CompleteGraph(numVertex);
-
-                //myGraph.SetElementCoordinates(canvasMain.ActualWidth / 2, canvasMain.ActualHeight / 2);
-
-                //DrawGraph(myGraph);
-
-                //index = 0; //set the index of the current triple to beginning
+                drawGraph();
             }
             else
             {
@@ -154,24 +148,22 @@ namespace GraphDecomposition.Presentation
 
         }
 
-        private void drawGraph(int numVertex)
+        private void drawGraph()
         {
             this.canvasMain.Children.Clear();
 
-            //create vertices
-            for (int i = 1; i <= numVertex; i++)
-            {
-                Ellipse newVertex = createNewVertex(i, numVertex);
+            createVertices();
 
-                newVertex.MouseEnter += new System.Windows.Input.MouseEventHandler(Vertex_MouseEnter);
-                this.vertexDictionary.Add(i.ToString(), newVertex);
-                this.canvasMain.Children.Add(newVertex);
-            }
+            createEdges();
 
-            //create edges
-            for (int i = 1; i <= numVertex; i++)
+            this.statusLabel.Content = "Begin decomposition";
+        }
+
+        private void createEdges()
+        {
+            for (int i = 1; i <= this.numVertex; i++)
             {
-                for (int j = 1; j <= numVertex; j++)
+                for (int j = 1; j <= this.numVertex; j++)
                 {
                     //skip edges that would connect to the same vertex
                     if (i == j)
@@ -184,8 +176,18 @@ namespace GraphDecomposition.Presentation
                     this.canvasMain.Children.Add(newEdge);
                 }
             }
+        }
 
-            this.statusLabel.Content = "Begin decomposition";
+        private void createVertices()
+        {
+            for (int i = 1; i <= this.numVertex; i++)
+            {
+                Ellipse newVertex = createNewVertex(i);
+
+                newVertex.MouseEnter += new System.Windows.Input.MouseEventHandler(Vertex_MouseEnter);
+                this.vertexDictionary.Add(i.ToString(), newVertex);
+                this.canvasMain.Children.Add(newVertex);
+            }
         }
 
 
@@ -209,7 +211,7 @@ namespace GraphDecomposition.Presentation
             return newEdge;
         }
 
-        private Ellipse createNewVertex(int vertexNumber, int countVertex)
+        private Ellipse createNewVertex(int vertexNumber)
         {
             const double VERTEX_SIZE = 5;
 
@@ -218,7 +220,7 @@ namespace GraphDecomposition.Presentation
 
             double GRAPH_SIZE = System.Math.Min(canvasX / 2, canvasY / 2); //određivanje veličine grafa
 
-            double coordinateRad = vertexNumber * 360 / countVertex * System.Math.PI / 180;
+            double coordinateRad = vertexNumber * 360 / this.numVertex * System.Math.PI / 180;
 
             double coordinateX = canvasX + GRAPH_SIZE * System.Math.Cos(coordinateRad);
             double coordinateY = canvasY + GRAPH_SIZE * System.Math.Sin(coordinateRad);
@@ -230,24 +232,6 @@ namespace GraphDecomposition.Presentation
 
             return newVertex;
         }
-
-        //private void DrawGraph(CompleteGraph myGraph)
-        //{
-        //    canvasMain.Children.Clear();
-
-        //    foreach (Vertex ver in myGraph.Vertices)
-        //    {
-        //        ver.Point.MouseEnter += new System.Windows.Input.MouseEventHandler(Vertex_MouseEnter);
-        //        canvasMain.Children.Add(ver.Point);
-        //    }
-
-        //    foreach (Edge edg in myGraph.Edges)
-        //    {
-        //        canvasMain.Children.Add(edg.EdgeLine);
-        //    }
-
-        //    statusLabel.Content = "Begin decomposition";
-        //}
 
         void Vertex_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
