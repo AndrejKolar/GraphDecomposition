@@ -317,7 +317,29 @@ namespace GraphDecomposition.Presentation
             this.index++;
             statusLabel.Content = "Removing triple from graph: (" + myTriple.X.ToString() + ", " + myTriple.Y.ToString() + ", " + myTriple.Z.ToString() + ")";
 
+            animateTriple(myTriple, true);
+        }
 
+        private void buttonPrevTriple_Click(object sender, RoutedEventArgs e)
+        {
+
+            bool isBeginningOfDecomposition = this.index == 0;
+            if (isBeginningOfDecomposition)  
+            {
+                MessageBox.Show("You have reached the beginning of the decomposition.", "Status", MessageBoxButton.OK, MessageBoxImage.Information);
+                statusLabel.Content = "Begin decomposition";
+                return;
+            }
+
+            this.index--;
+            Triple myTriple = this.sts.Element(this.index);
+            statusLabel.Content = "Returning triple to graph: (" + myTriple.X.ToString() + ", " + myTriple.Y.ToString() + ", " + myTriple.Z.ToString() + ")";
+
+            animateTriple(myTriple, false);
+        }
+
+        private void animateTriple(Triple myTriple, bool isRemoval)
+        {
             Ellipse firstVertex = this.vertexDictionary[myTriple.X.ToString()];
             Ellipse secondVertex = this.vertexDictionary[myTriple.Y.ToString()];
             Ellipse thirdVertex = this.vertexDictionary[myTriple.Z.ToString()];
@@ -326,60 +348,27 @@ namespace GraphDecomposition.Presentation
             Line secondEdge = this.edgeDictionary[getEdgeName(myTriple.X, myTriple.Z)];
             Line thirdEdge = this.edgeDictionary[getEdgeName(myTriple.Z, myTriple.Y)];
 
-            AnimVertex(firstVertex, opacityAnimVertexF);
-            AnimVertex(secondVertex, opacityAnimVertexF);
-            AnimVertex(thirdVertex, opacityAnimVertexF);
+            if (isRemoval)
+            {
+                AnimVertex(firstVertex, opacityAnimVertexF);
+                AnimVertex(secondVertex, opacityAnimVertexF);
+                AnimVertex(thirdVertex, opacityAnimVertexF);
 
-            AnimEdge(firstEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
-            AnimEdge(secondEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
-            AnimEdge(thirdEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
+                AnimEdge(firstEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
+                AnimEdge(secondEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
+                AnimEdge(thirdEdge, opacityAnimEdgeF, animatedBrushForward, colorAnimFoward);
+            }
+            else
+            {
+                AnimVertex(firstVertex, opacityAnimBack);
+                AnimVertex(secondVertex, opacityAnimBack);
+                AnimVertex(thirdVertex, opacityAnimBack);
 
+                AnimEdge(firstEdge, opacityAnimBack, animatedBrushBack, colorAnimBack);
+                AnimEdge(secondEdge, opacityAnimBack, animatedBrushBack, colorAnimBack);
+                AnimEdge(thirdEdge, opacityAnimBack, animatedBrushBack, colorAnimBack);
+            }
 
-        }
-
-        private void buttonPrevTriple_Click(object sender, RoutedEventArgs e)
-        {
-
-            //if (index == 0)  //checks if it's the end of decomposition
-            //{
-            //    MessageBox.Show("You have reached the beginning of the decomposition.", "Status", MessageBoxButton.OK, MessageBoxImage.Information);
-            //    statusLabel.Content = "Begin decomposition";
-            //    return;
-            //}
-
-            //index--;
-
-            //Triple myTriple = mySTS.TripleList[index]; //read the prev triple
-
-            //statusLabel.Content = "Returning triple to graph: " + myTriple.FirstPair + " " + myTriple.SecondPair + " " + myTriple.ThirdPair;
-
-            //Vertex firstV = null;
-            //Vertex secondV = null;
-            //Vertex thirdV = null;   //finding the three vertices of a triple
-            //foreach (Vertex ver in myGraph.Vertices)
-            //{
-            //    if (ver.Name == myTriple.FirstPair)
-            //    {
-            //        firstV = ver;
-            //    }
-            //    if (ver.Name == myTriple.SecondPair)
-            //    {
-            //        secondV = ver;
-            //    }
-            //    if (ver.Name == myTriple.ThirdPair)
-            //    {
-            //        thirdV = ver;
-            //    }
-            //}
-
-
-            //AnimVertex(firstV, opacityAnimBack);
-            //AnimVertex(secondV, opacityAnimBack);
-            //AnimVertex(thirdV, opacityAnimBack);
-
-            //AnimEdge(firstV, secondV, opacityAnimBack, animatedBrushBack, colorAnimBack);
-            //AnimEdge(firstV, thirdV, opacityAnimBack, animatedBrushBack, colorAnimBack);
-            //AnimEdge(secondV, thirdV, opacityAnimBack, animatedBrushBack, colorAnimBack);
 
         }
 
