@@ -2,20 +2,18 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{27D500F4-1DD8-4D79-BABC-A9B09DC9BE7A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{10BA61A4-1BE7-4ECF-9A37-1B7C69E7340A}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GraphDecomposition.Tester</RootNamespace>
-    <AssemblyName>GraphDecomposition.Tester</AssemblyName>
+    <RootNamespace>GraphDecomposition.Interfaces</RootNamespace>
+    <AssemblyName>GraphDecomposition.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,8 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,25 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="IDecompositionAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraphDecomposition.Algorithms\GraphDecomposition.Algorithms.csproj">
-      <Project>{DD8686EB-A464-4611-B836-A77256786272}</Project>
-      <Name>GraphDecomposition.Algorithms</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GraphDecomposition.GraphElements\GraphDecomposition.GraphElements.csproj">
       <Project>{50663050-C076-46AD-8F10-9116B635F7CE}</Project>
       <Name>GraphDecomposition.GraphElements</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphDecomposition.Interfaces\GraphDecomposition.Interfaces.csproj">
-      <Project>{10BA61A4-1BE7-4ECF-9A37-1B7C69E7340A}</Project>
-      <Name>GraphDecomposition.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphDecomposition.Utils\GraphDecomposition.Utils.csproj">
-      <Project>{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}</Project>
-      <Name>GraphDecomposition.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

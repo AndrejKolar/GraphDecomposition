@@ -1,10 +1,11 @@
 ﻿using GraphDecomposition.GraphElements;
 using GraphDecomposition.Utils;
+using GraphDecomposition.Interfaces;
 
 
 namespace GraphDecomposition.Algorithms
 {
-    public class Skolem
+    public class Skolem : IDecompositionAlgorithm
     {
         /// <summary>
         /// Number of vertices in a graph

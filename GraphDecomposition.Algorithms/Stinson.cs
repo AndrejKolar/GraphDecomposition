@@ -1,9 +1,10 @@
 ﻿using System;
 using GraphDecomposition.GraphElements;
+using GraphDecomposition.Interfaces;
 
-namespace GraphDecomposition.Algorithms
+namespace GraphDecomposition.Algorithms 
 {
-    public class Stinson
+    public class Stinson : IDecompositionAlgorithm
     {
         /// <summary>
         /// Number of vertices in a graph

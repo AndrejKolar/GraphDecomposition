@@ -127,6 +127,10 @@
       <Project>{50663050-C076-46AD-8F10-9116B635F7CE}</Project>
       <Name>GraphDecomposition.GraphElements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GraphDecomposition.Interfaces\GraphDecomposition.Interfaces.csproj">
+      <Project>{10BA61A4-1BE7-4ECF-9A37-1B7C69E7340A}</Project>
+      <Name>GraphDecomposition.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GraphDecomposition.Utils\GraphDecomposition.Utils.csproj">
       <Project>{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}</Project>
       <Name>GraphDecomposition.Utils</Name>
