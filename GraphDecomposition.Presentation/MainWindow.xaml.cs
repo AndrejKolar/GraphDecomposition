@@ -279,29 +279,52 @@ namespace GraphDecomposition.Presentation
                 return;
             }
 
-            //creates an algorithm object and runs the algorithm
-            switch (GraphUtils.ChooseConstruction(this.numVertex))
+            bool canDecomposeGraph = GraphUtils.CanDecomposeGraph(this.numVertex);
+            if (!canDecomposeGraph)
             {
-                case ConstructionType.Bose:
-                    this.algorithm = new Bose();
-                    this.sts = this.algorithm.StartAlgorithm(this.numVertex);
-                    break;
-                case ConstructionType.Skolem:
-                    this.algorithm = new Skolem();
-                    this.sts = this.algorithm.StartAlgorithm(this.numVertex);
-                    break;
-                case ConstructionType.None:
-                    MessageBox.Show("Cannot decompose a graph with this number of vertices", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                default:
-                    break;
+                MessageBox.Show("Cannot decompose a graph with this number of vertices", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
             closeInputSection();
 
-            showDecompositionButtons();
+            showAlgorithmPickerButtons();
+
+            setLabelOnConstructionButton();
+        }
+
+        private void setLabelOnConstructionButton()
+        {
+            switch (GraphUtils.ChooseConstruction(this.numVertex))
+            {
+                case ConstructionType.Bose:
+                    this.buttonConstruction.Content = "Bose";
+                    break;
+                case ConstructionType.Skolem:
+                    this.buttonConstruction.Content = "Skolem";
+                    break;
+                case ConstructionType.None:
+                    return;
+                default:
+                    break;
+            }
+        }
+
+        private void showAlgorithmPickerButtons()
+        {
+            this.buttonConstruction.Visibility = System.Windows.Visibility.Visible;
+            this.buttonHeuristic.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void buttonHeuristic_Click(object sender, RoutedEventArgs e)
+        {
 
         }
+
+        private void buttonConstruction_Click(object sender, RoutedEventArgs e)
+        {
+
+        }   
 
         private void showDecompositionButtons()
         {
@@ -388,7 +411,7 @@ namespace GraphDecomposition.Presentation
             animatedBrush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnim);
             edge.Stroke = animatedBrush;
             edge.BeginAnimation(Line.OpacityProperty, opacityAnim);
-        }     
+        }  
 
     }
 

@@ -27,15 +27,17 @@
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
         <Rectangle Canvas.Left="0" Name="rectangle3" Stroke="Black" Grid.Column="1" Grid.Row="1" Grid.RowSpan="10" />
-        <Canvas Grid.Column="1" Grid.Row="1" Name="canvasMain" Grid.RowSpan="10"></Canvas>
-        <Button Grid.Column="3" Grid.Row="1" Name="buttonCreate" Background="Transparent" Click="buttonCreate_Click" Grid.ColumnSpan="3">Create graph</Button>
-        <Button Grid.Column="3" Grid.Row="3" Name="buttonDecompose" Background="Transparent" Click="buttonDecompose_Click" Visibility="Visible" Grid.ColumnSpan="3">Decompose</Button>
-        <Label Name="labelInput1" Visibility="Hidden" Grid.Column="3" Margin="16,0,22,21" Grid.Row="3" Grid.ColumnSpan="3">Input num</Label>
-        <Label Name="labelInput2" Grid.Column="3" Margin="16,20,22,0" Grid.Row="3" Visibility="Hidden" Grid.ColumnSpan="3">of vertices:</Label>
+        <Canvas Grid.Column="1" Grid.Row="1" Name="canvasMain" Grid.RowSpan="10"/>
+        <Button Grid.Column="3" Grid.Row="1" Name="buttonCreate" Background="Transparent" Click="buttonCreate_Click" Grid.ColumnSpan="3" Content="Create graph"/>
+        <Button Grid.Column="3" Grid.Row="3" Name="buttonDecompose" Background="Transparent" Click="buttonDecompose_Click" Visibility="Visible" Grid.ColumnSpan="3" Content="Decompose"/>
+        <Label Name="labelInput1" Visibility="Hidden" Grid.Column="3" Margin="16,0,22,21" Grid.Row="3" Grid.ColumnSpan="3" Content="Input num"/>
+        <Label Name="labelInput2" Grid.Column="3" Margin="16,20,22,0" Grid.Row="3" Visibility="Hidden" Grid.ColumnSpan="3" Content="of vertices"/>
         <TextBox Grid.Column="3" Grid.Row="5" Name="textBoxInput" Visibility="Hidden" Grid.ColumnSpan="3" />
-        <Button Grid.Column="3" Grid.Row="7" Name="buttonDrawGraph" Background="Transparent" Visibility="Hidden" Click="buttonDrawGraph_Click" Grid.ColumnSpan="3">Draw graph</Button>
+        <Button Grid.Column="3" Grid.Row="7" Name="buttonDrawGraph" Background="Transparent" Visibility="Hidden" Click="buttonDrawGraph_Click" Grid.ColumnSpan="3" Content="Draw graph"/>
         <Button Background="Transparent" Content=">" Name="buttonNextTriple" Visibility="Hidden"  Grid.Column="5" Grid.Row="5" Click="buttonNextTriple_Click"/>
-        <Button Background="Transparent" Content="&lt;" Name="buttonPrevTriple" Visibility="Hidden" Grid.Column="3"  Grid.Row="5"  Click="buttonPrevTriple_Click" />
+        <Button Background="Transparent" Content="&lt;" Name="buttonPrevTriple" Visibility="Hidden" Grid.Column="3"  Grid.Row="5"  Click="buttonPrevTriple_Click"/>
+        <Button Background="Transparent" Content="Stinson" Name="buttonHeuristic" Visibility="Hidden" Grid.Column="3"  Grid.Row="5" Click="buttonHeuristic_Click" />
+        <Button Background="Transparent" Content="Bose" Name="buttonConstruction" Visibility="Hidden" Grid.Column="5"  Grid.Row="5"  Click="buttonConstruction_Click"/>
         <Label Content="" Grid.Column="1" Grid.Row="11" Height="35" HorizontalAlignment="Center" Name="statusLabel" VerticalAlignment="Center" Width="449" />
     </Grid>
 </Window>
