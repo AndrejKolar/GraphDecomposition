@@ -21,7 +21,7 @@ namespace GraphDecomposition.Presentation
     {
         private Regex isNum = new Regex("^[0-9]+$");   //to check if input is Int
         private bool createButtonClicked = false;
-
+        private bool isDecompositionStarted = false;
         private int index = 0;
 
         private int numVertex;
@@ -115,14 +115,14 @@ namespace GraphDecomposition.Presentation
             labelInput2.Visibility = Visibility.Hidden;
             textBoxInput.Visibility = Visibility.Hidden;
             buttonDrawGraph.Visibility = Visibility.Hidden;
-            textBoxInput.Text = "";
+            textBoxInput.Text = String.Empty;
         }
 
         private void openInputSection()
         {
             createButtonClicked = true;
 
-            Grid.SetRow(buttonDecompose, 9); //set row of a button in a grid
+            Grid.SetRow(buttonDecompose, 9);
 
             labelInput1.Visibility = Visibility.Visible;
             labelInput2.Visibility = Visibility.Visible;
@@ -164,6 +164,9 @@ namespace GraphDecomposition.Presentation
             this.canvasMain.Children.Clear();
             this.vertexDictionary.Clear();
             this.edgeDictionary.Clear();
+            this.sts = null;
+            this.index = 0;
+            this.isDecompositionStarted = false;
         }
 
         private void createEdges()
@@ -183,19 +186,6 @@ namespace GraphDecomposition.Presentation
                     this.canvasMain.Children.Add(newEdge);
                 }
             }
-        }
-
-        private static string getEdgeName(int i, int j)
-        {
-            if (i < j)
-            {
-                return i.ToString() + "_" + j.ToString();
-            }
-            else
-            {
-                return j.ToString() + "_" + i.ToString();
-            }
-            
         }
 
         private void createVertices()
@@ -252,26 +242,27 @@ namespace GraphDecomposition.Presentation
             return newVertex;
         }
 
-        void Vertex_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private string getEdgeName(int i, int j)
         {
-            Ellipse vertex = (Ellipse)sender;
-
-            String name = "This is vertex: ";
-
-            foreach (KeyValuePair<String, Ellipse> pair in vertexDictionary)
+            if (i < j)
             {
-                if (vertex.Equals(pair.Value))
-                {
-                    name += pair.Key;
-                    break;
-                }
+                return i.ToString() + "_" + j.ToString();
+            }
+            else
+            {
+                return j.ToString() + "_" + i.ToString();
             }
 
-            this.statusLabel.Content = name;
         }
 
         private void buttonDecompose_Click(object sender, RoutedEventArgs e)
         {
+            if (isDecompositionStarted)
+            {
+                MessageBox.Show("Decomposition has already started. Please create a new graph.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             bool noGraphCreated = this.canvasMain.Children.Count == 0;
             if (noGraphCreated)   //graph has not been created
             {
@@ -282,7 +273,7 @@ namespace GraphDecomposition.Presentation
             bool canDecomposeGraph = GraphUtils.CanDecomposeGraph(this.numVertex);
             if (!canDecomposeGraph)
             {
-                MessageBox.Show("Cannot decompose a graph with this number of vertices", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Cannot decompose a graph with this number of vertices.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -310,21 +301,51 @@ namespace GraphDecomposition.Presentation
             }
         }
 
+        private void buttonHeuristic_Click(object sender, RoutedEventArgs e)
+        {
+            this.algorithm = new Stinson();
+            startDecompostion();
+        }
+
+        private void buttonConstruction_Click(object sender, RoutedEventArgs e)
+        {
+            switch (GraphUtils.ChooseConstruction(this.numVertex))
+            {
+                case ConstructionType.Bose:
+                    this.algorithm = new Bose();
+                    break;
+                case ConstructionType.Skolem:
+                    this.algorithm = new Skolem();
+                    break;
+                case ConstructionType.None:
+                    return;
+                default:
+                    break;
+            }
+
+            startDecompostion();
+        }
+
+        private void startDecompostion()
+        {
+            this.isDecompositionStarted = true;
+            this.sts = this.algorithm.StartAlgorithm(this.numVertex);
+
+            showDecompositionButtons();
+            hideAlgorithmPickerButtons();
+        }
+
         private void showAlgorithmPickerButtons()
         {
             this.buttonConstruction.Visibility = System.Windows.Visibility.Visible;
             this.buttonHeuristic.Visibility = System.Windows.Visibility.Visible;
         }
 
-        private void buttonHeuristic_Click(object sender, RoutedEventArgs e)
+        private void hideAlgorithmPickerButtons()
         {
-
+            this.buttonConstruction.Visibility = System.Windows.Visibility.Hidden;
+            this.buttonHeuristic.Visibility = System.Windows.Visibility.Hidden;
         }
-
-        private void buttonConstruction_Click(object sender, RoutedEventArgs e)
-        {
-
-        }   
 
         private void showDecompositionButtons()
         {
@@ -411,7 +432,25 @@ namespace GraphDecomposition.Presentation
             animatedBrush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnim);
             edge.Stroke = animatedBrush;
             edge.BeginAnimation(Line.OpacityProperty, opacityAnim);
-        }  
+        }
+
+        void Vertex_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Ellipse vertex = (Ellipse)sender;
+
+            String name = "This is vertex: ";
+
+            foreach (KeyValuePair<String, Ellipse> pair in vertexDictionary)
+            {
+                if (vertex.Equals(pair.Value))
+                {
+                    name += pair.Key;
+                    break;
+                }
+            }
+
+            this.statusLabel.Content = name;
+        }
 
     }
 
