@@ -270,7 +270,6 @@ namespace GraphDecomposition.Presentation
             this.statusLabel.Content = name;
         }
 
-
         private void buttonDecompose_Click(object sender, RoutedEventArgs e)
         {
             bool noGraphCreated = this.canvasMain.Children.Count == 0;
@@ -293,7 +292,7 @@ namespace GraphDecomposition.Presentation
                     break;
                 case ConstructionType.None:
                     MessageBox.Show("Cannot decompose a graph with this number of vertices", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    break;
+                    return;
                 default:
                     break;
             }
