@@ -1,16 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using System.Collections.Generic;
-
 using GraphDecomposition.Algorithms;
 using GraphDecomposition.GraphElements;
-using GraphDecomposition.Utils;
 using GraphDecomposition.Interfaces;
+using GraphDecomposition.Utils;
 
 namespace GraphDecomposition.Presentation
 {
@@ -19,27 +18,60 @@ namespace GraphDecomposition.Presentation
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Regex isNum = new Regex("^[0-9]+$");   //to check if input is Int
+        /// <summary>
+        /// Regex checks if the string is a number
+        /// </summary>
+        private Regex isNum = new Regex("^[0-9]+$");
+
+        /// <summary>
+        /// True if the UI section for the new graph creation is opened
+        /// </summary>
         private bool createButtonClicked = false;
+
+        /// <summary>
+        /// True if the graph decomposition is started
+        /// </summary>
         private bool isDecompositionStarted = false;
+
+        /// <summary>
+        /// Index of current triple that is removed in the graph decomposition
+        /// </summary>
         private int index = 0;
 
+        /// <summary>
+        /// Number of vertices in the created complete graph
+        /// </summary>
         private int numVertex;
 
+        /// <summary>
+        /// Steiner triple system created by the decomposition
+        /// </summary>
         private SteinerTripleSystem sts;
 
+        /// <summary>
+        /// Algorithm used for the decomposition
+        /// </summary>
         private IDecompositionAlgorithm algorithm;
 
+        /// <summary>
+        /// Dictionary used for indexing vertex elements drawn on the canvas
+        /// </summary>
         private Dictionary<String, Ellipse> vertexDictionary = new Dictionary<string, Ellipse>();
+
+        /// <summary>
+        /// Dictionary used for indexing edge elements drawn on the canvas
+        /// </summary>
         private Dictionary<String, Line> edgeDictionary = new Dictionary<string, Line>();
 
+        #region Animation parameters
         private DoubleAnimation opacityAnimEdgeF;
         private DoubleAnimation opacityAnimVertexF;
         private ColorAnimation colorAnimFoward;
         private SolidColorBrush animatedBrushForward;
         private DoubleAnimation opacityAnimBack;
         private ColorAnimation colorAnimBack;
-        private SolidColorBrush animatedBrushBack;
+        private SolidColorBrush animatedBrushBack; 
+        #endregion
 
 
         public MainWindow()
@@ -92,6 +124,11 @@ namespace GraphDecomposition.Presentation
             #endregion
         }
 
+        /// <summary>
+        /// Button event for opening the UI section for entering the number of vertices for the complete graph
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
             if (createButtonClicked == false)  
@@ -105,6 +142,9 @@ namespace GraphDecomposition.Presentation
 
         }
 
+        /// <summary>
+        /// Method closes the part of UI for inputing the number of vertices
+        /// </summary>
         private void closeInputSection()
         {
             createButtonClicked = false;
@@ -118,6 +158,10 @@ namespace GraphDecomposition.Presentation
             textBoxInput.Text = String.Empty;
         }
 
+
+        /// <summary>
+        /// Method opens the part of the UI for inputing the number of vertices
+        /// </summary>
         private void openInputSection()
         {
             createButtonClicked = true;
@@ -132,6 +176,11 @@ namespace GraphDecomposition.Presentation
             buttonPrevTriple.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Button event for drawing the complete graph
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDrawGraph_Click(object sender, RoutedEventArgs e)
         {
             if (isNum.IsMatch(textBoxInput.Text))
@@ -148,6 +197,9 @@ namespace GraphDecomposition.Presentation
 
         }
 
+        /// <summary>
+        /// Method clears the old graph elements and creates new ones
+        /// </summary>
         private void drawGraph()
         {
             clearGraphElements();
@@ -159,6 +211,9 @@ namespace GraphDecomposition.Presentation
             this.statusLabel.Content = "Begin decomposition";
         }
 
+        /// <summary>
+        /// Removes old graph elements
+        /// </summary>
         private void clearGraphElements()
         {
             this.canvasMain.Children.Clear();
@@ -169,6 +224,9 @@ namespace GraphDecomposition.Presentation
             this.isDecompositionStarted = false;
         }
 
+        /// <summary>
+        /// Creates edges for the complete graph
+        /// </summary>
         private void createEdges()
         {
             for (int i = 1; i <= this.numVertex; i++)
@@ -188,6 +246,9 @@ namespace GraphDecomposition.Presentation
             }
         }
 
+        /// <summary>
+        /// Creates vertices for the complete graph
+        /// </summary>
         private void createVertices()
         {
             for (int i = 1; i <= this.numVertex; i++)
@@ -200,6 +261,12 @@ namespace GraphDecomposition.Presentation
             }
         }
 
+        /// <summary>
+        /// Creates a single edge for the complete graph
+        /// </summary>
+        /// <param name="x">First incident vertex</param>
+        /// <param name="y">Second incident vertex</param>
+        /// <returns>Line element representing an edge</returns>
         private Line createNewEdge(int x, int y)
         {
             const double VERTEX_SIZE = 5;
@@ -220,6 +287,11 @@ namespace GraphDecomposition.Presentation
             return newEdge;
         }
 
+        /// <summary>
+        /// Creates a single vertex for the complete graph
+        /// </summary>
+        /// <param name="vertexNumber">Number of the vertex</param>
+        /// <returns>Ellipse element representing a vertex</returns>
         private Ellipse createNewVertex(int vertexNumber)
         {
             const double VERTEX_SIZE = 5;
@@ -242,6 +314,12 @@ namespace GraphDecomposition.Presentation
             return newVertex;
         }
 
+        /// <summary>
+        /// Creates a name for the edge UI element
+        /// </summary>
+        /// <param name="i">First incident vertex number</param>
+        /// <param name="j">Second incident vertex number</param>
+        /// <returns>Vertex name</returns>
         private string getEdgeName(int i, int j)
         {
             if (i < j)
@@ -255,6 +333,11 @@ namespace GraphDecomposition.Presentation
 
         }
 
+        /// <summary>
+        /// Button event for starting the decompostition process
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDecompose_Click(object sender, RoutedEventArgs e)
         {
             if (isDecompositionStarted)
@@ -284,6 +367,9 @@ namespace GraphDecomposition.Presentation
             setLabelOnConstructionButton();
         }
 
+        /// <summary>
+        /// Sets the label of the construction button depending on the vertex number
+        /// </summary>
         private void setLabelOnConstructionButton()
         {
             switch (GraphUtils.ChooseConstruction(this.numVertex))
@@ -301,12 +387,22 @@ namespace GraphDecomposition.Presentation
             }
         }
 
+        /// <summary>
+        /// Button event used to pick a heuristic decompostition
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonHeuristic_Click(object sender, RoutedEventArgs e)
         {
             this.algorithm = new Stinson();
             startDecompostion();
         }
 
+        /// <summary>
+        /// Button event used to pick a construction decompostiton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonConstruction_Click(object sender, RoutedEventArgs e)
         {
             switch (GraphUtils.ChooseConstruction(this.numVertex))
@@ -326,6 +422,9 @@ namespace GraphDecomposition.Presentation
             startDecompostion();
         }
 
+        /// <summary>
+        /// Starts the graph decompostition
+        /// </summary>
         private void startDecompostion()
         {
             this.isDecompositionStarted = true;
@@ -335,24 +434,38 @@ namespace GraphDecomposition.Presentation
             hideAlgorithmPickerButtons();
         }
 
+        /// <summary>
+        /// Makes the algorithm picker buttons visible
+        /// </summary>
         private void showAlgorithmPickerButtons()
         {
             this.buttonConstruction.Visibility = System.Windows.Visibility.Visible;
             this.buttonHeuristic.Visibility = System.Windows.Visibility.Visible;
         }
 
+        /// <summary>
+        /// Hides the algorithm picker buttons
+        /// </summary>
         private void hideAlgorithmPickerButtons()
         {
             this.buttonConstruction.Visibility = System.Windows.Visibility.Hidden;
             this.buttonHeuristic.Visibility = System.Windows.Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Shows the decomposition buttons
+        /// </summary>
         private void showDecompositionButtons()
         {
             buttonNextTriple.Visibility = Visibility.Visible;
             buttonPrevTriple.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Next triple button event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonNextTriple_Click(object sender, RoutedEventArgs e)
         {
             bool isEndOfDecomposition = this.index == this.sts.Count();
@@ -370,6 +483,11 @@ namespace GraphDecomposition.Presentation
             animateTriple(myTriple, true);
         }
 
+        /// <summary>
+        /// Previous triple button event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonPrevTriple_Click(object sender, RoutedEventArgs e)
         {
 
@@ -388,6 +506,11 @@ namespace GraphDecomposition.Presentation
             animateTriple(myTriple, false);
         }
 
+        /// <summary>
+        /// Starts the animation of the triple 
+        /// </summary>
+        /// <param name="myTriple">Triple to be animated</param>
+        /// <param name="isRemoval">Is the triple being removed or put back</param>
         private void animateTriple(Triple myTriple, bool isRemoval)
         {
             Ellipse firstVertex = this.vertexDictionary[myTriple.X.ToString()];
@@ -422,11 +545,23 @@ namespace GraphDecomposition.Presentation
 
         }
 
+        /// <summary>
+        /// Animates a single vertex
+        /// </summary>
+        /// <param name="vertex">Vertex to be animated</param>
+        /// <param name="opacityAnim">Animation to be used</param>
         private void AnimVertex(Ellipse vertex, DoubleAnimation opacityAnim)
         {
             vertex.BeginAnimation(Ellipse.OpacityProperty, opacityAnim);
         }
 
+        /// <summary>
+        /// Animates a single edge
+        /// </summary>
+        /// <param name="edge">Edge to be animated</param>
+        /// <param name="opacityAnim">Animation to be used</param>
+        /// <param name="animatedBrush">Brush to be used</param>
+        /// <param name="colorAnim">Color to be used</param>
         private void AnimEdge(Line edge, DoubleAnimation opacityAnim, SolidColorBrush animatedBrush, ColorAnimation colorAnim)
         {
             animatedBrush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnim);
@@ -434,6 +569,11 @@ namespace GraphDecomposition.Presentation
             edge.BeginAnimation(Line.OpacityProperty, opacityAnim);
         }
 
+        /// <summary>
+        /// Event fired when the mouse hovers over a vertex
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void Vertex_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             Ellipse vertex = (Ellipse)sender;
