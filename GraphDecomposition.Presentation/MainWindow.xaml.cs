@@ -94,7 +94,7 @@ namespace GraphDecomposition.Presentation
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-            if (createButtonClicked == false)  //toggle vertices number display
+            if (createButtonClicked == false)  
             {
                 openInputSection();
             }
@@ -150,13 +150,20 @@ namespace GraphDecomposition.Presentation
 
         private void drawGraph()
         {
-            this.canvasMain.Children.Clear();
+            clearGraphElements();
 
             createVertices();
 
             createEdges();
 
             this.statusLabel.Content = "Begin decomposition";
+        }
+
+        private void clearGraphElements()
+        {
+            this.canvasMain.Children.Clear();
+            this.vertexDictionary.Clear();
+            this.edgeDictionary.Clear();
         }
 
         private void createEdges()
