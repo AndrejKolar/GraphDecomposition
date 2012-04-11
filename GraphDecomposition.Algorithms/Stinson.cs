@@ -19,16 +19,16 @@ namespace GraphDecomposition.Algorithms
         /// <summary>
         /// LivePoints array contains all the live points 
         /// </summary>
-        private int[] LivePoints;
-        private int[] IndexLivePoints;
-        private int NumLivePoints;
+        protected int[] LivePoints;
+        protected int[] IndexLivePoints;
+        protected int NumLivePoints;
 
         /// <summary>
         /// LivePairs array contains for each live point an array of all the points that make a live pair with that point
         /// </summary>
-        private int[,] LivePairs;
-        private int[,] IndexLivePairs;
-        private int[] NumLivePairs;
+        protected int[,] LivePairs;
+        protected int[,] IndexLivePairs;
+        protected int[] NumLivePairs;
 
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace GraphDecomposition.Algorithms
         /// <summary>
         /// Number of blocks in the PSTS(v)
         /// </summary>
-        private int NumBlocks;
+        protected int NumBlocks;
 
         /// <summary>
         /// Starts the algorithm
@@ -86,7 +86,7 @@ namespace GraphDecomposition.Algorithms
         /// Initailises the arrays at at the begining of the hill-climbing algorithm
         /// </summary>
         /// <param name="v">Number of vertices in the complete graph</param>
-        private void Initialize(int v)
+        protected void Initialize(int v)
         {
             int arraySize = v + 1;
 
@@ -133,7 +133,7 @@ namespace GraphDecomposition.Algorithms
         /// </summary>
         /// <param name="x">First vertex</param>
         /// <param name="y">Second vertex</param>
-        private void InsertPair(int x, int y)
+        protected void InsertPair(int x, int y)
         {
             if (NumLivePairs[x] == 0)
             {
@@ -153,7 +153,7 @@ namespace GraphDecomposition.Algorithms
         /// </summary>
         /// <param name="x">First vertex</param>
         /// <param name="y">Second vertex</param>
-        private void DeletePair(int x, int y)
+        protected void DeletePair(int x, int y)
         {
             int posn = IndexLivePairs[x, y];    //LivePairs[x, posn] = y -> IndexLivePairs[x, y] = posn
             int num = NumLivePairs[x];          //NumLivePairs[x] = num -> posn of the last entry in the LivePairs array
@@ -182,7 +182,7 @@ namespace GraphDecomposition.Algorithms
         /// <param name="x">First vertex</param>
         /// <param name="y">Second vertex</param>
         /// <param name="z">Third vertex</param>
-        private void AddBlock(int x, int y, int z)
+        protected void AddBlock(int x, int y, int z)
         {
             Other[x, y] = z;
             Other[y, x] = z;
@@ -206,7 +206,7 @@ namespace GraphDecomposition.Algorithms
         /// <param name="y">Second vertex</param>
         /// <param name="z">Third vertex</param>
         /// <param name="w">Old vertex</param>
-        private void ExchangeBlock(int x, int y, int z, int w)
+        protected void ExchangeBlock(int x, int y, int z, int w)
         {
             Other[x, y] = z;
             Other[y, x] = z;
