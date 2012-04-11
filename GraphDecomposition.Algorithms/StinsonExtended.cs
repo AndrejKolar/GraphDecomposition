@@ -7,7 +7,7 @@ using GraphDecomposition.GraphElements;
 
 namespace GraphDecomposition.Algorithms
 {
-    public class StinsonContinous : Stinson, IDecompositionAlgorithm
+    public class StinsonExtended : Stinson, IDecompositionAlgorithm
     {
         /// <summary>
         /// Probability with which a block will be removed
