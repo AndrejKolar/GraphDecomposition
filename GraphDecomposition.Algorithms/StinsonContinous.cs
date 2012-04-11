@@ -10,6 +10,11 @@ namespace GraphDecomposition.Algorithms
     public class StinsonContinous : Stinson, IDecompositionAlgorithm
     {
         /// <summary>
+        /// Probability with which a block will be removed
+        /// </summary>
+        public const double ALPHA = 0.66;
+
+        /// <summary>
         /// Starts the algorithm
         /// </summary>
         /// <param name="v">Number of vertices in a graph</param>
@@ -39,20 +44,31 @@ namespace GraphDecomposition.Algorithms
         }
 
         /// <summary>
-        /// Removes rand number of blocks from the decomposition. Number of blocks removed ranges from half to all the blocks.
+        /// Removes a random number of blocks from the decomposition.
         /// </summary>
         private void RemoveRandBlocks(SteinerTripleSystem sts)
         {
             Random rand = new Random();
 
-            int numbBlocksToRemove = rand.Next(sts.Count() / 2, sts.Count() + 1);
-            for (int i = 0; i < numbBlocksToRemove; i++)
+            for (int i = 0; i < sts.Count(); i++)
             {
-                Triple triple = sts.Element(i);
-                RemoveBlock(triple.X, triple.Y, triple.Z);
+                bool removeBlock = rand.NextDouble() > ALPHA;
+
+                if (removeBlock)
+                {
+                    Triple triple = sts.Element(i);
+                    RemoveBlock(triple.X, triple.Y, triple.Z);
+                }
             }
+
         }
 
+        /// <summary>
+        /// Removes a block from the deconstruction
+        /// </summary>
+        /// <param name="x">First vertex</param>
+        /// <param name="y">Second vertex</param>
+        /// <param name="z">Third vertex</param>
         private void RemoveBlock(int x, int y, int z)
         {
             Other[x, y] = 0;
