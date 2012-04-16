@@ -67,8 +67,8 @@ namespace GraphDecomposition.GraphElements
         /// <summary>
         /// Gets the number of vertices in the STS(v)
         /// </summary>
-        /// <returns>Vertices number</returns>
-        public int NumVertices()
+        /// <returns>Number of vertices</returns>
+        public int NumVertex()
         {
             return this.v;
         }
