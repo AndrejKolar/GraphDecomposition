@@ -39,14 +39,33 @@ namespace GraphDecomposition.Tester
                 sts = aStinsonExtended.NextDecomposition(sts);
                 LogUtils.AppendIncidenceMatrix(sts);
             }
+
+            writeDecompositionInfo(sts);
             
         }
 
         /// <summary>
-        /// Writes the tripple to the console
+        /// Writes info about the decomposition to the console
         /// </summary>
-        /// <param name="sts">Triple for console output</param>
-        private static void writeDecomposition(SteinerTripleSystem sts)
+        /// <param name="sts">STS(v)</param>
+        private static void writeDecompositionInfo(SteinerTripleSystem sts)
+        {
+            Console.WriteLine("v: {0} b: {1}", NUM_VERTEX, sts.Count());
+            Console.WriteLine("Decomposition finished");
+
+            if (ITERATIONS_COUNT != 0)
+            {
+                Console.WriteLine("Number of iterations: {0}", ITERATIONS_COUNT);
+                Console.WriteLine("Log file locaton: " + LOG_FILE_PATH); 
+            } 
+
+        }
+
+        /// <summary>
+        /// Writes the decomposition result to the console
+        /// </summary>
+        /// <param name="sts">STS(v)</param>
+        private static void writeDecompositionResult(SteinerTripleSystem sts)
         {
             foreach (Triple t in sts)
             {
