@@ -7,7 +7,7 @@ namespace GraphDecomposition.GraphElements
         /// <summary>
         /// Array of triples in the STS(v)
         /// </summary>
-        private Triple[] tripleList;
+        private Triple[] tripleArray;
 
         /// <summary>
         /// Index of the triple array
@@ -20,7 +20,7 @@ namespace GraphDecomposition.GraphElements
         /// <param name="b">Number of triples</param>
         public SteinerTripleSystem(int b)
         {
-            this.tripleList = new Triple[b];
+            this.tripleArray = new Triple[b];
             this.index = 0;
         }
 
@@ -30,9 +30,9 @@ namespace GraphDecomposition.GraphElements
         /// <returns>A triple from the STS(v)</returns>
         public IEnumerator GetEnumerator()
         {
-            for (int i = 0; i < tripleList.Length; i++)
+            for (int i = 0; i < tripleArray.Length; i++)
             {
-                yield return tripleList[i];
+                yield return tripleArray[i];
             }
         }
 
@@ -44,7 +44,7 @@ namespace GraphDecomposition.GraphElements
         /// <param name="z">Third vertex</param>
         public void AddTriple(int x, int y, int z)
         {
-            this.tripleList[this.index] = new Triple(x, y, z);
+            this.tripleArray[this.index] = new Triple(x, y, z);
             index++;
         }
 
@@ -54,7 +54,7 @@ namespace GraphDecomposition.GraphElements
         /// <returns>Number of triples</returns>
         public int Count()
         {
-            return tripleList.Length;
+            return tripleArray.Length;
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace GraphDecomposition.GraphElements
         /// <returns>Triple with the specidied index</returns>
         public Triple Element(int index)
         {
-            return tripleList[index];
+            return tripleArray[index];
         }
 
 
