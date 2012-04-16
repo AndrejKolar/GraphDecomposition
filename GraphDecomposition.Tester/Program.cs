@@ -1,6 +1,7 @@
 ﻿using System;
 using GraphDecomposition.Algorithms;
 using GraphDecomposition.GraphElements;
+using GraphDecomposition.Utils;
 
 namespace GraphDecomposition.Tester
 {
@@ -18,13 +19,17 @@ namespace GraphDecomposition.Tester
 
             SteinerTripleSystem sts = aStinsonContinous.StartAlgorithm(NUM_VERTEX);
 
+            LogUtils.CreateLogFile("test_log.txt");
+            
+            LogUtils.AppendIncidenceMatrix(sts);
+
             writeDecomposition(sts);
 
             for (int i = 0; i < ITERATIONS_COUNT; i++)
             {
                 sts = aStinsonContinous.NextDecomposition(sts);
 
-                writeDecomposition(sts);
+                LogUtils.AppendIncidenceMatrix(sts);
             }
             
         }
