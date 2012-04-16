@@ -10,7 +10,7 @@ namespace GraphDecomposition.Tester
         /// <summary>
         /// Number of vertices in the graph
         /// </summary>
-        private static int NUM_VERTEX = 13;
+        private static int NUM_VERTEX = 7;
 
         /// <summary>
         /// Number of iterations for the StinsonExtended algorithm

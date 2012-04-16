@@ -59,7 +59,7 @@ namespace GraphDecomposition.Utils
 
                 foreach (string line in matrixRows)
                 {
-                    streamWriter.WriteLine(line);
+                    streamWriter.WriteLine(line.Trim());
                 }
 
                 streamWriter.WriteLine();
