@@ -9,6 +9,7 @@ namespace GraphDecomposition.Tester
     {
         private static int NUM_VERTEX = 13;
         private static int ITERATIONS_COUNT = 5;
+        private static string LOG_FILE_PATH = "test_log.txt";
 
         static void Main(string[] args)
         {
@@ -16,14 +17,11 @@ namespace GraphDecomposition.Tester
             Skolem aSkolem = new Skolem();
             Bose aBose = new Bose();
             StinsonExtended aStinsonContinous = new StinsonExtended();
+            LogUtils.CreateLogFile(LOG_FILE_PATH);
 
             SteinerTripleSystem sts = aStinsonContinous.StartAlgorithm(NUM_VERTEX);
-
-            LogUtils.CreateLogFile("test_log.txt");
             
             LogUtils.AppendIncidenceMatrix(sts);
-
-            writeDecomposition(sts);
 
             for (int i = 0; i < ITERATIONS_COUNT; i++)
             {
