@@ -7,7 +7,7 @@ namespace GraphDecomposition.Utils
     public static class LogUtils
     {
         /// <summary>
-        /// Path for the log file
+        /// Path of the log file
         /// </summary>
         private static string path;
 
