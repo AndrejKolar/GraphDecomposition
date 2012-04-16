@@ -42,7 +42,7 @@ namespace GraphDecomposition.Algorithms
             this.n = (v - 3) / 6;
             this.b = v * (v - 1) / 6;
             this.quasigroup = new Quasigroup(2 * n + 1);
-            this.sts = new SteinerTripleSystem(b);
+            this.sts = new SteinerTripleSystem(v, b);
 
             CreateTypeOne();
             CreateTypeTwo();

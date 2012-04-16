@@ -15,11 +15,18 @@ namespace GraphDecomposition.GraphElements
         private int index;
 
         /// <summary>
-        /// Constructor initialises the STS(v) with the number of vertices
+        /// Number of vertices
         /// </summary>
+        private int v;
+
+        /// <summary>
+        /// Constructor initialises the STS(v) with the number of vertices and triples
+        /// </summary>
+        /// <param name="v">Number of vertices</param>
         /// <param name="b">Number of triples</param>
-        public SteinerTripleSystem(int b)
+        public SteinerTripleSystem(int v, int b)
         {
+            this.v = v;
             this.tripleArray = new Triple[b];
             this.index = 0;
         }
@@ -55,6 +62,15 @@ namespace GraphDecomposition.GraphElements
         public int Count()
         {
             return tripleArray.Length;
+        }
+
+        /// <summary>
+        /// Gets the number of vertices in the STS(v)
+        /// </summary>
+        /// <returns>Vertices number</returns>
+        public int NumVertices()
+        {
+            return this.v;
         }
 
         /// <summary>
