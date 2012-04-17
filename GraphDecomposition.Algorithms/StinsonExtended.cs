@@ -47,13 +47,13 @@ namespace GraphDecomposition.Algorithms
         {
             Random rand = new Random();
 
-            for (int i = 0; i < sts.Count(); i++)
+            for (int i = 0; i < sts.NumTriples(); i++)
             {
                 bool removeBlock = rand.NextDouble() > ALPHA;
 
                 if (removeBlock)
                 {
-                    Triple triple = sts.Element(i);
+                    Triple triple = sts.GetElement(i);
                     RemoveBlock(triple.X, triple.Y, triple.Z);
                 }
             }

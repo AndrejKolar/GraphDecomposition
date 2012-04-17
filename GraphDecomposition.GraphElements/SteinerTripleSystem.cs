@@ -59,7 +59,7 @@ namespace GraphDecomposition.GraphElements
         /// Gets the number of triples in the STS(v)
         /// </summary>
         /// <returns>Number of triples</returns>
-        public int Count()
+        public int NumTriples()
         {
             return tripleArray.Length;
         }
@@ -78,7 +78,7 @@ namespace GraphDecomposition.GraphElements
         /// </summary>
         /// <param name="index">Index of the triple</param>
         /// <returns>Triple with the specidied index</returns>
-        public Triple Element(int index)
+        public Triple GetElement(int index)
         {
             return tripleArray[index];
         }

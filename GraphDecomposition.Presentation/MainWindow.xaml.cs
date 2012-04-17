@@ -468,7 +468,7 @@ namespace GraphDecomposition.Presentation
         /// <param name="e"></param>
         private void buttonNextTriple_Click(object sender, RoutedEventArgs e)
         {
-            bool isEndOfDecomposition = this.index == this.sts.Count();
+            bool isEndOfDecomposition = this.index == this.sts.NumTriples();
             if (isEndOfDecomposition)
             {
                 MessageBox.Show("You have reached the end of the decomposition.", "Status", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -476,7 +476,7 @@ namespace GraphDecomposition.Presentation
                 return;
             }
 
-            Triple myTriple = this.sts.Element(this.index);
+            Triple myTriple = this.sts.GetElement(this.index);
             this.index++;
             statusLabel.Content = "Removing triple from graph: (" + myTriple.X.ToString() + ", " + myTriple.Y.ToString() + ", " + myTriple.Z.ToString() + ")";
 
@@ -500,7 +500,7 @@ namespace GraphDecomposition.Presentation
             }
 
             this.index--;
-            Triple myTriple = this.sts.Element(this.index);
+            Triple myTriple = this.sts.GetElement(this.index);
             statusLabel.Content = "Returning triple to graph: (" + myTriple.X.ToString() + ", " + myTriple.Y.ToString() + ", " + myTriple.Z.ToString() + ")";
 
             animateTriple(myTriple, false);
