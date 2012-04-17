@@ -35,7 +35,7 @@ namespace GraphDecomposition.Tester
             LogUtils.CreateLogFile(LOG_FILE_PATH, sts);
 
 
-            for (int i = 0; i < ITERATIONS_COUNT; i++)
+            for (int i = 1; i < ITERATIONS_COUNT; i++)
             {
                 sts = aStinsonExtended.NextDecomposition(sts);
                 LogUtils.AppendIncidenceMatrix(sts);
