@@ -20,7 +20,7 @@ namespace GraphDecomposition.Tester
         /// <summary>
         /// Path of the logfile for the generated incidence matrices
         /// </summary>
-        private static string LOG_FILE_PATH = "test_log.txt";
+        private static string LOG_FILE_PATH = "decomposition_log.txt";
 
         /// <summary>
         /// Main function of the console program
@@ -29,10 +29,11 @@ namespace GraphDecomposition.Tester
         static void Main(string[] args)
         {
             StinsonExtended aStinsonExtended = new StinsonExtended();
-            LogUtils.CreateLogFile(LOG_FILE_PATH);
+            
 
-            SteinerTripleSystem sts = aStinsonExtended.StartAlgorithm(NUM_VERTEX);            
-            LogUtils.AppendIncidenceMatrix(sts);
+            SteinerTripleSystem sts = aStinsonExtended.StartAlgorithm(NUM_VERTEX);
+            LogUtils.CreateLogFile(LOG_FILE_PATH, sts);
+
 
             for (int i = 0; i < ITERATIONS_COUNT; i++)
             {
@@ -50,7 +51,7 @@ namespace GraphDecomposition.Tester
         /// <param name="sts">STS(v)</param>
         private static void writeDecompositionInfo(SteinerTripleSystem sts)
         {
-            Console.WriteLine("v: {0} b: {1}", NUM_VERTEX, sts.Count());
+            Console.WriteLine("v: {0} b: {1}", NUM_VERTEX, sts.NumTriples());
             Console.WriteLine("Decomposition finished");
 
             if (ITERATIONS_COUNT != 0)
