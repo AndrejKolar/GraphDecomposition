@@ -12,17 +12,23 @@ namespace GraphDecomposition.Utils
         private static string path;
 
         /// <summary>
-        /// Creates an empty log file
+        /// Creates a log file with a single incidence matrix
+        /// Log file starts with v and b
+        /// UNIX line endings
         /// </summary>
         /// <param name="logPath">Path of the log file</param>
-        public static void CreateLogFile(string logPath)
+        public static void CreateLogFile(string logPath, SteinerTripleSystem sts)
         {
             path = logPath;
 
             using (StreamWriter streamWriter = new StreamWriter(path, false))
             {
-                streamWriter.Write(string.Empty);
+                //Write v and b to the first line of the logfile
+                streamWriter.Write(sts.NumVertex().ToString() +" " + sts.NumTriples().ToString() + "\n");
+                streamWriter.Write("\n");
             }
+
+            AppendIncidenceMatrix(sts);
         }
 
         /// <summary>
@@ -56,13 +62,12 @@ namespace GraphDecomposition.Utils
                     }
                 }
 
-
                 foreach (string line in matrixRows)
                 {
-                    streamWriter.WriteLine(line.Trim());
+                    streamWriter.Write(line.Trim() + "\n");
                 }
 
-                streamWriter.WriteLine();
+                streamWriter.Write("\n");
             }
         }
     }
