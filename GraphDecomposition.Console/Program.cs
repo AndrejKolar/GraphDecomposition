@@ -23,7 +23,7 @@ namespace GraphDecomposition.Tester
             if (args.Length != 2)
             {
                 Console.WriteLine("Program must be started with two parameters.");
-                Console.WriteLine( "First argument is the number of vertices of the complete graph.");
+                Console.WriteLine("First argument is the number of vertices of the complete graph.");
                 Console.WriteLine("Second argument is the number of iterations.");
                 return;
             }
@@ -34,8 +34,7 @@ namespace GraphDecomposition.Tester
             int numIterations = 0;
             bool isNumIterationsOk = int.TryParse(args[1], out numIterations);
 
-            bool parametarsOk = isNumIterationsOk && isNumVertexOk;
-            
+            bool parametarsOk = isNumIterationsOk && isNumVertexOk;            
             if (!parametarsOk)
             {
                 Console.WriteLine("Error inputing parameters.");
