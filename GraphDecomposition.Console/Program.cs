@@ -8,16 +8,6 @@ namespace GraphDecomposition.Tester
     class Program
     {
         /// <summary>
-        /// Number of vertices in the graph
-        /// </summary>
-        private static int NUM_VERTEX = 13;
-
-        /// <summary>
-        /// Number of iterations for the StinsonExtended algorithm
-        /// </summary>
-        private static int ITERATIONS_COUNT = 500;
-
-        /// <summary>
         /// Path of the logfile for the generated incidence matrices
         /// </summary>
         private static string LOG_FILE_PATH = "decomposition_log.txt";
@@ -25,23 +15,55 @@ namespace GraphDecomposition.Tester
         /// <summary>
         /// Main function of the console program
         /// </summary>
-        /// <param name="args">Command line arguments not used</param>
+        /// <param name="args">First command line argument is the number of vertices in the graph
+        /// Second argument is the number of iterations</param>
         static void Main(string[] args)
         {
-            StinsonExtended aStinsonExtended = new StinsonExtended();         
 
-            SteinerTripleSystem sts = aStinsonExtended.StartAlgorithm(NUM_VERTEX);
+            if (args.Length != 2)
+            {
+                Console.WriteLine("Program must be started with two parameters.");
+                Console.WriteLine( "First argument is the number of vertices of the complete graph.");
+                Console.WriteLine("Second argument is the number of iterations.");
+                return;
+            }
+
+            int numVertex = 0;
+            bool isNumVertexOk = int.TryParse(args[0], out numVertex);
+
+            int numIterations = 0;
+            bool isNumIterationsOk = int.TryParse(args[1], out numIterations);
+
+            bool parametarsOk = isNumIterationsOk && isNumVertexOk;
+            
+            if (!parametarsOk)
+            {
+                Console.WriteLine("Error inputing parameters.");
+                Console.WriteLine("First argument is the number of vertices of the complete graph.");
+                Console.WriteLine("Second argument is the number of iterations.");
+                return;
+            }
+
+            if (!GraphUtils.CanDecomposeGraph(numVertex))
+            {
+                Console.WriteLine("Cannot decompose a graph with this number of vertices: {0}", numVertex);
+                return;
+            }
+
+            StinsonExtended aStinsonExtended = new StinsonExtended();
+
+            SteinerTripleSystem sts = aStinsonExtended.StartAlgorithm(numVertex);
             LogUtils.CreateLogFile(LOG_FILE_PATH, sts);
 
-            for (int i = 1; i < ITERATIONS_COUNT; i++)
+            for (int i = 1; i < numIterations; i++)
             {                
                 sts = aStinsonExtended.NextDecomposition(sts);
                 LogUtils.AppendIncidenceMatrix(sts);
 
-                Console.WriteLine("Iteration {0} / {1}", i.ToString(), ITERATIONS_COUNT.ToString());
+                Console.WriteLine("Iteration {0} / {1}", i.ToString(), numIterations.ToString());
             }
 
-            Console.WriteLine("Iteration {0} / {1}", ITERATIONS_COUNT.ToString(), ITERATIONS_COUNT.ToString());
+            Console.WriteLine("Iteration {0} / {1}", numIterations.ToString(), numIterations.ToString());
             Console.WriteLine("Decomposition done.");
         }
 
