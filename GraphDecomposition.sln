@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.Interfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.Console", "GraphDecomposition.Console\GraphDecomposition.Console.csproj", "{27D500F4-1DD8-4D79-BABC-A9B09DC9BE7A}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GraphDecomposition.Setup", "GraphDecomposition.Setup\GraphDecomposition.Setup.vdproj", "{20BCB255-08E2-4456-A3F9-6B0B271BAB7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,12 @@ Global
 		{27D500F4-1DD8-4D79-BABC-A9B09DC9BE7A}.Release|Mixed Platforms.Build.0 = Release|x86
 		{27D500F4-1DD8-4D79-BABC-A9B09DC9BE7A}.Release|x86.ActiveCfg = Release|x86
 		{27D500F4-1DD8-4D79-BABC-A9B09DC9BE7A}.Release|x86.Build.0 = Release|x86
+		{20BCB255-08E2-4456-A3F9-6B0B271BAB7A}.Debug|Any CPU.ActiveCfg = Debug
+		{20BCB255-08E2-4456-A3F9-6B0B271BAB7A}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{20BCB255-08E2-4456-A3F9-6B0B271BAB7A}.Debug|x86.ActiveCfg = Debug
+		{20BCB255-08E2-4456-A3F9-6B0B271BAB7A}.Release|Any CPU.ActiveCfg = Release
+		{20BCB255-08E2-4456-A3F9-6B0B271BAB7A}.Release|Mixed Platforms.ActiveCfg = Release
+		{20BCB255-08E2-4456-A3F9-6B0B271BAB7A}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
