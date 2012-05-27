@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using GraphDecomposition.Algorithms;
 using GraphDecomposition.GraphElements;
 using GraphDecomposition.Utils;
@@ -8,17 +9,13 @@ namespace GraphDecomposition.Tester
     class Program
     {
         /// <summary>
-        /// Path of the logfile for the generated incidence matrices
-        /// </summary>
-        private static string LOG_FILE_PATH = "decomposition_log.txt";
-
-        /// <summary>
         /// Main function of the console program
         /// </summary>
         /// <param name="args">First command line argument is the number of vertices in the graph
         /// Second argument is the number of iterations</param>
         static void Main(string[] args)
         {
+            string LogFilePath = ConfigurationManager.AppSettings["LogFilePath"];
 
             if (args.Length != 2)
             {
@@ -52,7 +49,7 @@ namespace GraphDecomposition.Tester
             StinsonExtended aStinsonExtended = new StinsonExtended();
 
             SteinerTripleSystem sts = aStinsonExtended.StartAlgorithm(numVertex);
-            LogUtils.CreateLogFile(LOG_FILE_PATH, sts);
+            LogUtils.CreateLogFile(LogFilePath, sts);
 
             for (int i = 1; i < numIterations; i++)
             {                
