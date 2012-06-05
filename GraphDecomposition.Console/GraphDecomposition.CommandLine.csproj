@@ -8,8 +8,8 @@
     <ProjectGuid>{27D500F4-1DD8-4D79-BABC-A9B09DC9BE7A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GraphDecomposition.Tester</RootNamespace>
-    <AssemblyName>ExtendedStinsonsAlgorithm</AssemblyName>
+    <RootNamespace>GraphDecomposition.CommandLine</RootNamespace>
+    <AssemblyName>GraphDecomposition.CommandLine</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -4,7 +4,7 @@ using GraphDecomposition.Algorithms;
 using GraphDecomposition.GraphElements;
 using GraphDecomposition.Utils;
 
-namespace GraphDecomposition.Tester
+namespace GraphDecomposition.CommandLine
 {
     class Program
     {

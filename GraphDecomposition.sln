@@ -11,9 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.Presenta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.Interfaces", "GraphDecomposition.Interfaces\GraphDecomposition.Interfaces.csproj", "{10BA61A4-1BE7-4ECF-9A37-1B7C69E7340A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.Console", "GraphDecomposition.Console\GraphDecomposition.Console.csproj", "{27D500F4-1DD8-4D79-BABC-A9B09DC9BE7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphDecomposition.CommandLine", "GraphDecomposition.Console\GraphDecomposition.CommandLine.csproj", "{27D500F4-1DD8-4D79-BABC-A9B09DC9BE7A}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GraphDecomposition.Setup", "GraphDecomposition.Setup\GraphDecomposition.Setup.vdproj", "{20BCB255-08E2-4456-A3F9-6B0B271BAB7A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{50663050-C076-46AD-8F10-9116B635F7CE} = {50663050-C076-46AD-8F10-9116B635F7CE}
+		{10BA61A4-1BE7-4ECF-9A37-1B7C69E7340A} = {10BA61A4-1BE7-4ECF-9A37-1B7C69E7340A}
+		{DD8686EB-A464-4611-B836-A77256786272} = {DD8686EB-A464-4611-B836-A77256786272}
+		{F2CAF9FD-5DDE-42F9-92E1-00504A773CAF} = {F2CAF9FD-5DDE-42F9-92E1-00504A773CAF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
