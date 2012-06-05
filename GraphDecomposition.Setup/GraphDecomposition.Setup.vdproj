@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_102F0E74CC474246832642C00C5627F4"
+        "MsmKey" = "8:_280483F88213486D9C187AD603612652"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -28,13 +28,13 @@
         "Entry"
         {
         "MsmKey" = "8:_2CB052FD8CB3AF9303D6A9261760DB0F"
-        "OwnerKey" = "8:_8F8C51F3F71E49B5A3B7E5F490116201"
+        "OwnerKey" = "8:_6B2984AB42B34917A836F51EF7D19879"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2CB052FD8CB3AF9303D6A9261760DB0F"
-        "OwnerKey" = "8:_102F0E74CC474246832642C00C5627F4"
+        "OwnerKey" = "8:_280483F88213486D9C187AD603612652"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -46,13 +46,13 @@
         "Entry"
         {
         "MsmKey" = "8:_3C88DD7583AB2B7E8A2667DCC36B9A20"
-        "OwnerKey" = "8:_8F8C51F3F71E49B5A3B7E5F490116201"
+        "OwnerKey" = "8:_6B2984AB42B34917A836F51EF7D19879"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_3C88DD7583AB2B7E8A2667DCC36B9A20"
-        "OwnerKey" = "8:_102F0E74CC474246832642C00C5627F4"
+        "OwnerKey" = "8:_280483F88213486D9C187AD603612652"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,31 +76,31 @@
         "Entry"
         {
         "MsmKey" = "8:_68DA7711198805400B86CB81B6EABE63"
-        "OwnerKey" = "8:_8F8C51F3F71E49B5A3B7E5F490116201"
+        "OwnerKey" = "8:_6B2984AB42B34917A836F51EF7D19879"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_68DA7711198805400B86CB81B6EABE63"
-        "OwnerKey" = "8:_102F0E74CC474246832642C00C5627F4"
+        "OwnerKey" = "8:_280483F88213486D9C187AD603612652"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8F8C51F3F71E49B5A3B7E5F490116201"
+        "MsmKey" = "8:_6B2984AB42B34917A836F51EF7D19879"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A1875469EA6910FE17B5AC4537A85A65"
-        "OwnerKey" = "8:_102F0E74CC474246832642C00C5627F4"
+        "OwnerKey" = "8:_280483F88213486D9C187AD603612652"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A1875469EA6910FE17B5AC4537A85A65"
-        "OwnerKey" = "8:_8F8C51F3F71E49B5A3B7E5F490116201"
+        "OwnerKey" = "8:_6B2984AB42B34917A836F51EF7D19879"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,13 +112,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8F8C51F3F71E49B5A3B7E5F490116201"
+        "OwnerKey" = "8:_6B2984AB42B34917A836F51EF7D19879"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_102F0E74CC474246832642C00C5627F4"
+        "OwnerKey" = "8:_280483F88213486D9C187AD603612652"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -164,6 +164,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -423,7 +436,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GraphDecomposition"
         "ProductCode" = "8:{F27AE505-878A-47CC-ADB0-CEB75FAEC787}"
-        "PackageCode" = "8:{A1112772-893E-4DE2-9D5E-52A5777408A0}"
+        "PackageCode" = "8:{AC01B747-EF0F-46C5-98DB-D80DA20F3499}"
         "UpgradeCode" = "8:{803E950B-D2FB-43EC-8F51-A1D06178D2D5}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -942,7 +955,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_102F0E74CC474246832642C00C5627F4"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_280483F88213486D9C187AD603612652"
             {
             "SourcePath" = "8:..\\GraphDecomposition.Presentation\\obj\\Release\\GraphDecomposition.Presentation.exe"
             "TargetName" = "8:"
@@ -970,9 +983,9 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8F8C51F3F71E49B5A3B7E5F490116201"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6B2984AB42B34917A836F51EF7D19879"
             {
-            "SourcePath" = "8:..\\GraphDecomposition.Console\\obj\\x86\\Release\\GraphDecomposition.CommandLine.exe"
+            "SourcePath" = "8:..\\GraphDecomposition.CommandLine\\obj\\x86\\Release\\GraphDecomposition.CommandLine.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_92DF06D59D974C4F8718A91C944F40A1"
